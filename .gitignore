@@ -1,0 +1,109 @@
+# ─────────────────────────────────────────────
+#  EstimationPro — .gitignore
+# ─────────────────────────────────────────────
+
+# ── Secrets & environment ─────────────────────
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# ── Python ────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.Python
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+backend/.venv/
+backend/venv/
+
+# pytest / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+nosetests.xml
+coverage.xml
+*.cover
+
+# mypy / ruff / pyright
+.mypy_cache/
+.ruff_cache/
+.pyright/
+
+# ── Node / Frontend ───────────────────────────
+node_modules/
+frontend/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+
+# Build output
+frontend/dist/
+frontend/build/
+frontend/.vite/
+dist/
+build/
+
+# ── Generated files ───────────────────────────
+backend/generated/
+*.pdf
+
+# ── OS files ──────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ── IDE / Editor ──────────────────────────────
+.vscode/settings.json
+.vscode/launch.json
+.vscode/*.code-workspace
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+
+# ── Logs ──────────────────────────────────────
+*.log
+logs/
+*.log.*
+
+# ── Database / local storage ──────────────────
+*.sqlite
+*.sqlite3
+*.db
+estimationpro.db
+
+# ── Kiro ──────────────────────────────────────
+.kiro/
+
+# ─────────────────────────────────────────────
+#  KEEP these tracked
+# ─────────────────────────────────────────────
+!data.json
+!frontend/.env.example
+!backend/database/schema.sql
+!README.md

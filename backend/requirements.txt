@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+pydantic-settings
+python-dotenv
+httpx
+rich
+supabase
+numpy
+scikit-learn
+reportlab
+python-multipart

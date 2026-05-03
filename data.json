@@ -1,0 +1,1395 @@
+[
+    {
+        "id": 1,
+        "project_name": "ShopEasy",
+        "domain": "E-commerce",
+        "requirements": "Build a modern e-commerce web application with user authentication, product catalog, shopping cart, secure payment integration, admin panel, order tracking, email notifications, mobile-responsive design, real-time inventory sync, user profile management.",
+        "modules": [
+            "User Authentication",
+            "Product Catalog",
+            "Shopping Cart",
+            "Payment Integration",
+            "Admin Panel",
+            "Order Tracking",
+            "Email Notifications",
+            "Mobile Responsive Design",
+            "Real-time Inventory Sync",
+            "User Profile Management"
+        ],
+        "complexity_vector": [
+            2.5,
+            180,
+            3.2,
+            0.25,
+            0.6
+        ],
+        "fpa_effort_pm": 22.0,
+        "cocomo_effort_pm": 24.0,
+        "ucp_effort_pm": 20.5,
+        "actual_effort_pm": 24.5,
+        "tech_stack": "Django, React, PostgreSQL, Redis, Stripe, Celery",
+        "outcome": "delayed",
+        "code_structure": "# ShopEasy — E-commerce Code Structure\n\n## Backend (Django/FastAPI)\n`\nbackend/\n├── main.py                    # App entry, CORS, routers\n├── routers/\n│   ├── auth.py                # JWT login, signup, refresh\n│   ├── products.py            # CRUD, search, filters\n│   ├── cart.py                # Add/remove, quantity, session\n│   ├── orders.py              # Checkout, status, history\n│   ├── payments.py            # Stripe integration, webhooks\n│   ├── admin.py               # Dashboard, reports, user mgmt\n│   └── inventory.py           # Stock sync, low-stock alerts\n├── models/\n│   ├── user.py\n│   ├── product.py\n│   ├── order.py\n│   └── payment.py\n├── services/\n│   ├── stripe_service.py      # Payment processing\n│   ├── email_service.py       # Order confirmation, alerts\n│   └── inventory_service.py   # Real-time sync\n└── database.py                # PostgreSQL + Redis connection\n`\n\n## Frontend (React + TypeScript)\n`\nfrontend/src/\n├── pages/\n│   ├── Home.tsx               # Product listing, search\n│   ├── Product.tsx            # Detail, reviews, add-to-cart\n│   ├── Cart.tsx               # Cart management\n│   ├── Checkout.tsx           # Payment flow\n│   ├── Orders.tsx             # Order history\n│   ├── Admin/                 # Admin panel pages\n│   └── Profile.tsx            # User profile, addresses\n├── components/\n│   ├── ProductCard.tsx\n│   ├── CartDrawer.tsx\n│   ├── PaymentForm.tsx        # Stripe Elements\n│   └── SearchBar.tsx\n└── lib/\n    ├── api.ts                 # Axios/fetch wrapper\n    ├── stripe.ts              # Stripe.js init\n    └── auth.ts                # Auth context\n`\n\n## Database (PostgreSQL)\n- users, products, categories, cart_items, orders, order_items, payments, reviews\n\n## Key APIs\n- POST /api/auth/login\n- GET /api/products?search=&category=&page=\n- POST /api/cart/add\n- POST /api/orders/checkout\n- POST /api/payments/stripe-webhook"
+    },
+    {
+        "id": 2,
+        "project_name": "HealthFirst",
+        "domain": "Healthcare",
+        "requirements": "Develop a healthcare platform with patient registration, appointment booking, e-prescription, billing, and medical reports.",
+        "modules": [
+            "Patient Registration",
+            "Appointment Booking",
+            "Eâ€‘Prescription",
+            "Billing",
+            "Medical Reports"
+        ],
+        "complexity_vector": [
+            2.8,
+            200,
+            3.0,
+            0.3,
+            0.5
+        ],
+        "fpa_effort_pm": 25.0,
+        "cocomo_effort_pm": 27.5,
+        "ucp_effort_pm": 23.0,
+        "actual_effort_pm": 28.0,
+        "tech_stack": "Spring Boot, Angular, MySQL, Twilio",
+        "outcome": "delayed",
+        "code_structure": "# HealthFirst — Healthcare Platform Code Structure\n\n## Backend (Spring Boot)\n`\nsrc/main/java/com/healthfirst/\n├── controllers/\n│   ├── PatientController.java\n│   ├── AppointmentController.java\n│   ├── PrescriptionController.java\n│   ├── BillingController.java\n│   └── ReportController.java\n├── services/\n│   ├── PatientService.java\n│   ├── AppointmentService.java\n│   ├── NotificationService.java   # Twilio SMS/email\n│   └── BillingService.java\n├── models/\n│   ├── Patient.java\n│   ├── Appointment.java\n│   ├── Prescription.java\n│   └── Invoice.java\n└── config/\n    ├── SecurityConfig.java        # JWT + role-based auth\n    └── DatabaseConfig.java\n`\n\n## Frontend (Angular)\n`\nsrc/app/\n├── modules/\n│   ├── patient/                   # Registration, profile\n│   ├── appointment/               # Booking calendar\n│   ├── prescription/              # E-prescription viewer\n│   ├── billing/                   # Invoice, payment\n│   └── reports/                   # Medical reports\n└── shared/\n    ├── auth.guard.ts\n    └── api.service.ts\n`\n\n## Database (MySQL)\n- patients, doctors, appointments, prescriptions, invoices, medical_reports\n\n## Key APIs\n- POST /api/patients/register\n- POST /api/appointments/book\n- GET /api/prescriptions/{patientId}\n- POST /api/billing/generate"
+    },
+    {
+        "id": 3,
+        "project_name": "PayFlow",
+        "domain": "Fintech",
+        "requirements": "Digital wallet with P2P transfers, transaction history, KYC, fraud detection.",
+        "modules": [
+            "User Wallet",
+            "P2P Transfer",
+            "Transaction History",
+            "KYC",
+            "Fraud Detection"
+        ],
+        "complexity_vector": [
+            3.0,
+            220,
+            3.5,
+            0.2,
+            0.8
+        ],
+        "fpa_effort_pm": 28.0,
+        "cocomo_effort_pm": 30.0,
+        "ucp_effort_pm": 26.5,
+        "actual_effort_pm": 27.0,
+        "tech_stack": "Node.js, Vue.js, MongoDB, Redis, Kafka",
+        "outcome": "on_time",
+        "code_structure": "# PayFlow — Digital Wallet Code Structure\n\n## Backend (Node.js/Express)\n`\nsrc/\n├── routes/\n│   ├── wallet.js              # Balance, top-up\n│   ├── transfer.js            # P2P transfers\n│   ├── transactions.js        # History, filters\n│   ├── kyc.js                 # Document upload, verification\n│   └── fraud.js               # Detection rules\n├── services/\n│   ├── walletService.js\n│   ├── transferService.js     # Atomic transactions\n│   ├── kycService.js          # ID verification\n│   └── fraudService.js        # ML-based detection\n├── models/\n│   ├── User.js\n│   ├── Wallet.js\n│   ├── Transaction.js\n│   └── KYCDocument.js\n└── middleware/\n    ├── auth.js                # JWT verification\n    └── rateLimit.js           # Fraud prevention\n`\n\n## Frontend (Vue.js)\n`\nsrc/\n├── views/\n│   ├── Dashboard.vue          # Balance, quick actions\n│   ├── Transfer.vue           # Send money\n│   ├── History.vue            # Transaction list\n│   ├── KYC.vue                # Document upload\n│   └── Profile.vue\n└── store/\n    ├── wallet.js              # Vuex wallet state\n    └── auth.js\n`\n\n## Database (MongoDB + Redis)\n- users, wallets, transactions, kyc_documents\n- Redis: session cache, rate limiting\n\n## Key APIs\n- POST /api/wallet/topup\n- POST /api/transfer/p2p\n- GET /api/transactions?page=&filter=\n- POST /api/kyc/upload"
+    },
+    {
+        "id": 4,
+        "project_name": "LogiTrack",
+        "domain": "Logistics",
+        "requirements": "Shipment tracking, route optimisation, driver app, invoicing, analytics dashboard.",
+        "modules": [
+            "Shipment Tracking",
+            "Route Optimisation",
+            "Driver App",
+            "Invoicing",
+            "Analytics"
+        ],
+        "complexity_vector": [
+            2.2,
+            160,
+            3.8,
+            0.18,
+            0.7
+        ],
+        "fpa_effort_pm": 18.0,
+        "cocomo_effort_pm": 20.0,
+        "ucp_effort_pm": 17.0,
+        "actual_effort_pm": 19.5,
+        "tech_stack": "FastAPI, React Native, PostGIS, Redis",
+        "outcome": "on_time",
+        "code_structure": "# LogiTrack — Logistics Platform Code Structure\n\n## Backend (FastAPI)\n`\nbackend/\n├── routers/\n│   ├── shipments.py           # CRUD, status updates\n│   ├── routes.py              # Optimization, mapping\n│   ├── drivers.py             # Assignment, tracking\n│   ├── invoices.py            # Generation, PDF export\n│   └── analytics.py          # Dashboard metrics\n├── services/\n│   ├── route_optimizer.py     # PostGIS + OR-Tools\n│   ├── tracking_service.py    # Real-time GPS\n│   └── notification_service.py\n└── models/\n    ├── shipment.py\n    ├── driver.py\n    └── route.py\n`\n\n## Frontend (React)\n`\nsrc/\n├── pages/\n│   ├── Dashboard.tsx          # Live map, KPIs\n│   ├── Shipments.tsx          # List, create, track\n│   ├── Routes.tsx             # Route planning\n│   ├── Drivers.tsx            # Driver management\n│   └── Analytics.tsx         # Charts, reports\n└── components/\n    ├── LiveMap.tsx            # Mapbox integration\n    └── ShipmentCard.tsx\n`\n\n## Database (PostgreSQL + PostGIS)\n- shipments, routes, drivers, vehicles, invoices\n\n## Key APIs\n- POST /api/shipments/create\n- GET /api/shipments/{id}/track\n- POST /api/routes/optimize\n- GET /api/analytics/dashboard"
+    },
+    {
+        "id": 5,
+        "project_name": "CMSPro",
+        "domain": "Content Management",
+        "requirements": "Article editor, media library, user roles, SEO tools, versioning.",
+        "modules": [
+            "Article Editor",
+            "Media Library",
+            "User Roles",
+            "SEO Tools",
+            "Versioning"
+        ],
+        "complexity_vector": [
+            2.0,
+            130,
+            4.0,
+            0.15,
+            0.4
+        ],
+        "fpa_effort_pm": 14.0,
+        "cocomo_effort_pm": 15.5,
+        "ucp_effort_pm": 13.0,
+        "actual_effort_pm": 14.0,
+        "tech_stack": "Laravel, Vue.js, MySQL, Elasticsearch",
+        "outcome": "on_time",
+        "code_structure": "# CMSPro — Content Management System Code Structure\n\n## Backend (Laravel)\n`\napp/\n├── Http/\n│   ├── Controllers/\n│   │   ├── ArticleController.php     # CRUD, versioning\n│   │   ├── MediaController.php       # Upload, library\n│   │   ├── RoleController.php        # Permissions\n│   │   └── SEOController.php         # Meta tags, sitemap\n│   └── Middleware/\n│       └── RoleMiddleware.php\n├── Models/\n│   ├── Article.php\n│   ├── Media.php\n│   ├── Role.php\n│   └── Revision.php                  # Version history\n└── Services/\n    ├── ElasticsearchService.php      # Full-text search\n    └── SEOService.php\n`\n\n## Frontend (Vue.js)\n`\nsrc/\n├── views/\n│   ├── Dashboard.vue\n│   ├── Editor.vue                    # WYSIWYG article editor\n│   ├── MediaLibrary.vue\n│   ├── Roles.vue\n│   └── SEOTools.vue\n├── components/\n│   ├── VersionHistory.vue\n│   └── MediaUploader.vue\n└── store/\n    ├── article.js\n    └── media.js\n`\n\n## Database (MySQL)\n- articles, media_files, roles, permissions, revisions\n\n## Key APIs\n- GET /api/articles?search=&version=\n- POST /api/articles\n- POST /api/media/upload\n- PUT /api/articles/{id}/restore/{version}"
+    },
+    {
+        "id": 6,
+        "project_name": "HotelBee",
+        "domain": "Hospitality",
+        "requirements": "Room booking, payment gateway, review system, admin panel, calendar sync.",
+        "modules": [
+            "Room Booking",
+            "Payment Gateway",
+            "Review System",
+            "Admin Panel",
+            "Calendar Sync"
+        ],
+        "complexity_vector": [
+            2.3,
+            170,
+            3.5,
+            0.22,
+            0.5
+        ],
+        "fpa_effort_pm": 19.0,
+        "cocomo_effort_pm": 21.0,
+        "ucp_effort_pm": 18.5,
+        "actual_effort_pm": 21.0,
+        "tech_stack": "Ruby on Rails, React, PostgreSQL, Stripe",
+        "outcome": "delayed",
+        "code_structure": "# HotelBee — Hospitality Platform Code Structure\n\n## Backend (Ruby on Rails)\n`\napp/\n├── controllers/\n│   ├── rooms_controller.rb          # Room listing, availability\n│   ├── bookings_controller.rb       # Create, cancel, modify\n│   ├── payments_controller.rb       # Stripe integration\n│   ├── reviews_controller.rb        # CRUD reviews\n│   └── admin/\n│       ├── dashboard_controller.rb\n│       └── calendar_sync_controller.rb\n├── models/\n│   ├── room.rb\n│   ├── booking.rb\n│   ├── payment.rb\n│   └── review.rb\n├── services/\n│   ├── stripe_service.rb\n│   ├── calendar_sync_service.rb     # iCal/Google Calendar\n│   └── availability_service.rb\n└── jobs/\n    └── calendar_update_job.rb\n`\n\n## Frontend (React)\n`\nsrc/\n├── pages/\n│   ├── Home.tsx                     # Room search\n│   ├── RoomDetail.tsx               # Photos, amenities, booking\n│   ├── Checkout.tsx                 # Payment form\n│   ├── Reviews.tsx\n│   └── Admin/\n│       ├── Dashboard.tsx\n│       └── CalendarSync.tsx\n├── components/\n│   ├── DatePicker.tsx\n│   ├── RoomCard.tsx\n│   └── StarRating.tsx\n└── lib/\n    └── stripe.ts\n`\n\n## Database (PostgreSQL)\n- rooms, bookings, payments, reviews, users\n\n## Key APIs\n- GET /api/rooms?check_in=&check_out=\n- POST /api/bookings\n- POST /api/payments/intent\n- POST /api/calendar/sync"
+    },
+    {
+        "id": 7,
+        "project_name": "EduLearn",
+        "domain": "EdTech",
+        "requirements": "Course catalog, video streaming, quizzes, certificates, instructor dashboard.",
+        "modules": [
+            "Course Catalog",
+            "Video Streaming",
+            "Quiz",
+            "Certificates",
+            "Instructor Dashboard"
+        ],
+        "complexity_vector": [
+            2.6,
+            190,
+            3.1,
+            0.28,
+            0.6
+        ],
+        "fpa_effort_pm": 23.0,
+        "cocomo_effort_pm": 25.0,
+        "ucp_effort_pm": 22.0,
+        "actual_effort_pm": 25.5,
+        "tech_stack": "Python/Django, React, AWS S3, PostgreSQL",
+        "outcome": "delayed",
+        "code_structure": "# EduLearn — EdTech Platform Code Structure\n\n## Backend (Django)\n`\nbackend/\n├── apps/\n│   ├── courses/               # Catalog, enrollment\n│   ├── videos/                # Streaming, progress\n│   ├── quizzes/               # Questions, scoring\n│   ├── certificates/          # Generation, verification\n│   └── instructors/           # Dashboard, analytics\n├── services/\n│   ├── video_service.py       # AWS S3 + CloudFront\n│   ├── certificate_service.py # PDF generation\n│   └── notification_service.py\n└── api/\n    └── urls.py\n`\n\n## Frontend (React)\n`\nsrc/\n├── pages/\n│   ├── Catalog.tsx            # Course browsing\n│   ├── Course.tsx             # Video player, curriculum\n│   ├── Quiz.tsx               # Interactive quiz\n│   ├── Certificate.tsx        # Download, share\n│   └── InstructorDashboard.tsx\n└── components/\n    ├── VideoPlayer.tsx        # Custom player\n    ├── ProgressBar.tsx\n    └── QuizCard.tsx\n`\n\n## Database (PostgreSQL + AWS S3)\n- users, courses, enrollments, videos, quiz_questions, certificates\n\n## Key APIs\n- GET /api/courses?category=&search=\n- POST /api/enrollments/enroll\n- GET /api/videos/{id}/stream\n- POST /api/quizzes/{id}/submit"
+    },
+    {
+        "id": 8,
+        "project_name": "CRM4U",
+        "domain": "CRM",
+        "requirements": "Contact management, deal pipeline, email integration, reporting, task manager.",
+        "modules": [
+            "Contact Management",
+            "Deal Pipeline",
+            "Email Integration",
+            "Reporting",
+            "Task Manager"
+        ],
+        "complexity_vector": [
+            2.1,
+            140,
+            3.9,
+            0.16,
+            0.4
+        ],
+        "fpa_effort_pm": 15.0,
+        "cocomo_effort_pm": 16.5,
+        "ucp_effort_pm": 14.5,
+        "actual_effort_pm": 15.0,
+        "tech_stack": "PHP/Symfony, jQuery, MySQL, SendGrid",
+        "outcome": "on_time",
+        "code_structure": "# CRM4U — CRM System Code Structure\n\n## Backend (Symfony)\n`\nsrc/\n├── Controller/\n│   ├── ContactController.php\n│   ├── DealController.php\n│   ├── EmailController.php\n│   ├── ReportController.php\n│   └── TaskController.php\n├── Entity/\n│   ├── Contact.php\n│   ├── Deal.php\n│   ├── PipelineStage.php\n│   ├── EmailLog.php\n│   ├── Task.php\n│   └── Report.php\n├── Service/\n│   ├── SendGridService.php\n│   ├── PipelineService.php\n│   └── ReportGenerator.php\n└── Repository/\n    └── ...\n`\n\n## Frontend (jQuery + Bootstrap)\n`\nassets/\n├── js/\n│   ├── contacts.js            # CRUD, search\n│   ├── deals.js               # Kanban board\n│   ├── email.js               # Compose, templates\n│   ├── reports.js             # Charts (Chart.js)\n│   └── tasks.js               # Task manager\n└── css/\n    └── style.css\n`\n\n## Database (MySQL)\n- contacts, deals, pipeline_stages, emails, tasks, reports_cache\n\n## Key APIs\n- GET /api/contacts?search=&page=\n- POST /api/deals/{id}/stage\n- POST /api/email/send\n- GET /api/reports/sales"
+    },
+    {
+        "id": 9,
+        "project_name": "BioMed",
+        "domain": "Healthcare",
+        "requirements": "Patient portal, lab results, appointment reminders, telemedicine, EHR.",
+        "modules": [
+            "Patient Portal",
+            "Lab Results",
+            "Appointment Reminders",
+            "Telemedicine",
+            "EHR"
+        ],
+        "complexity_vector": [
+            3.1,
+            240,
+            2.8,
+            0.35,
+            0.7
+        ],
+        "fpa_effort_pm": 30.0,
+        "cocomo_effort_pm": 32.0,
+        "ucp_effort_pm": 28.0,
+        "actual_effort_pm": 33.0,
+        "tech_stack": "Java/Spring, React, PostgreSQL, Twilio, WebRTC",
+        "outcome": "over_budget",
+        "code_structure": "# BioMed — Healthcare Platform Code Structure\n\n## Backend (Spring Boot)\n`\nsrc/main/java/com/biomed/\n├── controllers/\n│   ├── PatientPortalController.java\n│   ├── LabResultController.java\n│   ├── AppointmentController.java\n│   ├── TelemedicineController.java\n│   └── EHRController.java\n├── services/\n│   ├── TwilioService.java          # SMS reminders\n│   ├── WebRTCService.java          # Video call signaling\n│   ├── LabIntegrationService.java  # HL7/FHIR\n│   └── EHRService.java\n├── models/\n│   ├── Patient.java\n│   ├── LabResult.java\n│   ├── Appointment.java\n│   └── MedicalRecord.java\n└── config/\n    ├── SecurityConfig.java\n    └── WebSocketConfig.java\n`\n\n## Frontend (React)\n`\nsrc/\n├── pages/\n│   ├── Dashboard.tsx              # Overview\n│   ├── LabResults.tsx             # View, download\n│   ├── Appointments.tsx           # Schedule, reminders\n│   ├── Telemedicine.tsx           # Video call\n│   └── EHR.tsx                    # Medical history\n├── components/\n│   ├── VideoCall.tsx              # WebRTC\n│   └── ReminderSettings.tsx\n└── lib/\n    └── twilio.js\n`\n\n## Database (PostgreSQL)\n- patients, lab_results, appointments, ehr_records, users\n\n## Key APIs\n- GET /api/patients/{id}/lab-results\n- POST /api/appointments/reminder\n- POST /api/telemedicine/start\n- GET /api/ehr/{patientId}"
+    },
+    {
+        "id": 10,
+        "project_name": "QuickInvoice",
+        "domain": "Fintech",
+        "requirements": "Invoice generation, expense tracking, tax calculator, client management, payment reminders.",
+        "modules": [
+            "Invoice Generation",
+            "Expense Tracking",
+            "Tax Calculator",
+            "Client Management",
+            "Payment Reminders"
+        ],
+        "complexity_vector": [
+            2.4,
+            150,
+            3.6,
+            0.2,
+            0.5
+        ],
+        "fpa_effort_pm": 16.0,
+        "cocomo_effort_pm": 18.0,
+        "ucp_effort_pm": 15.5,
+        "actual_effort_pm": 17.0,
+        "tech_stack": "Node.js, Vue, MongoDB, Nodemailer",
+        "outcome": "on_time",
+        "code_structure": "# QuickInvoice — Fintech Invoicing Code Structure\n\n## Backend (Node.js/Express)\n`\nsrc/\n├── routes/\n│   ├── invoices.js            # Generate, send, download PDF\n│   ├── expenses.js            # CRUD, categories\n│   ├── taxes.js               # Calculate, reports\n│   ├── clients.js             # Manage clients\n│   └── reminders.js           # Payment reminders\n├── services/\n│   ├── pdfService.js          # PDF generation (PDFKit)\n│   ├── emailService.js        # Nodemailer\n│   ├── taxCalculator.js\n│   └── reminderScheduler.js   # Cron jobs\n├── models/\n│   ├── Invoice.js\n│   ├── Expense.js\n│   ├── Client.js\n│   └── Reminder.js\n└── middleware/\n    └── auth.js\n`\n\n## Frontend (Vue.js)\n`\nsrc/\n├── views/\n│   ├── Dashboard.vue          # Summary charts\n│   ├── Invoices.vue           # List, create, preview\n│   ├── Expenses.vue\n│   ├── TaxCalculator.vue\n│   ├── Clients.vue\n│   └── Reminders.vue\n├── components/\n│   ├── InvoiceForm.vue\n│   ├── ExpenseChart.vue\n│   └── ClientList.vue\n└── store/\n    └── invoice.js\n`\n\n## Database (MongoDB)\n- invoices, expenses, clients, reminders, users\n\n## Key APIs\n- POST /api/invoices/generate\n- GET /api/invoices/{id}/pdf\n- POST /api/expenses\n- GET /api/taxes/calculate?amount=&rate="
+    },
+    {
+        "id": 11,
+        "project_name": "FleetManager",
+        "domain": "Logistics",
+        "requirements": "Vehicle tracking, maintenance schedule, driver assignment, fuel log, reporting dashboard.",
+        "modules": [
+            "Vehicle Tracking",
+            "Maintenance Schedule",
+            "Driver Assignment",
+            "Fuel Log",
+            "Reporting Dashboard"
+        ],
+        "complexity_vector": [
+            2.7,
+            210,
+            3.0,
+            0.27,
+            0.6
+        ],
+        "fpa_effort_pm": 24.0,
+        "cocomo_effort_pm": 26.0,
+        "ucp_effort_pm": 22.5,
+        "actual_effort_pm": 26.0,
+        "tech_stack": ".NET Core, Angular, SQL Server, Azure Maps",
+        "outcome": "delayed",
+        "code_structure": "# FleetManager — Logistics Fleet Management Code Structure\n\n## Backend (.NET Core)\n`\nFleetManager/\n├── Controllers/\n│   ├── VehiclesController.cs       # Tracking, CRUD\n│   ├── MaintenanceController.cs    # Schedule, alerts\n│   ├── DriversController.cs        # Assignment\n│   ├── FuelController.cs           # Logs, efficiency\n│   └── ReportsController.cs\n├── Services/\n│   ├── AzureMapService.cs          # Geolocation\n│   ├── MaintenanceAlertService.cs\n│   └── ReportGenerator.cs\n├── Models/\n│   ├── Vehicle.cs\n│   ├── MaintenanceTask.cs\n│   ├── Driver.cs\n│   └── FuelLog.cs\n└── Data/\n    └── ApplicationDbContext.cs\n`\n\n## Frontend (Angular)\n`\nsrc/app/\n├── modules/\n│   ├── vehicles/                   # List, map tracking\n│   ├── maintenance/                # Schedule, history\n│   ├── drivers/                    # Assignment\n│   ├── fuel/                       # Log entry\n│   └── reports/                    # Dashboards\n├── components/\n│   ├── vehicle-map/\n│   └── fuel-efficiency-chart/\n└── services/\n    └── api.service.ts\n`\n\n## Database (SQL Server)\n- vehicles, maintenance_tasks, drivers, fuel_logs, reports\n\n## Key APIs\n- GET /api/vehicles/track\n- POST /api/maintenance/schedule\n- PUT /api/drivers/assign/{vehicleId}\n- POST /api/fuel/log"
+    },
+    {
+        "id": 12,
+        "project_name": "RealEstateHub",
+        "domain": "Real Estate",
+        "requirements": "Property listings, agent profiles, mortgage calculator, appointment scheduler, document upload.",
+        "modules": [
+            "Property Listings",
+            "Agent Profiles",
+            "Mortgage Calculator",
+            "Appointment Scheduler",
+            "Document Upload"
+        ],
+        "complexity_vector": [
+            2.2,
+            155,
+            3.7,
+            0.19,
+            0.5
+        ],
+        "fpa_effort_pm": 17.0,
+        "cocomo_effort_pm": 19.0,
+        "ucp_effort_pm": 16.0,
+        "actual_effort_pm": 18.0,
+        "tech_stack": "Django, React, PostgreSQL, Stripe Connect",
+        "outcome": "on_time",
+        "code_structure": "# RealEstateHub — Real Estate Platform Code Structure\n\n## Backend (Django)\n`\nbackend/\n├── apps/\n│   ├── properties/            # Listings, search, filters\n│   ├── agents/                # Profiles, reviews\n│   ├── mortgage/              # Calculator, pre-approval\n│   ├── appointments/          # Scheduling, calendar\n│   └── documents/             # Upload, storage\n├── services/\n│   ├── mapbox_service.py      # Geocoding\n│   ├── stripe_connect.py      # Agent payouts\n│   └── document_upload.py     # S3 storage\n└── api/\n    └── urls.py\n`\n\n## Frontend (React)\n`\nsrc/\n├── pages/\n│   ├── Home.tsx               # Property search\n│   ├── PropertyDetail.tsx     # Gallery, mortgage calc\n│   ├── AgentProfile.tsx\n│   ├── AppointmentScheduler.tsx\n│   └── DocumentUpload.tsx\n├── components/\n│   ├── PropertyMap.tsx\n│   ├── MortgageForm.tsx\n│   └── Calendar.tsx\n└── lib/\n    └── api.ts\n`\n\n## Database (PostgreSQL)\n- properties, agents, appointments, documents, users\n\n## Key APIs\n- GET /api/properties?city=&price_min=&price_max=\n- GET /api/mortgage/calculate?price=&down_payment=\n- POST /api/appointments/book\n- POST /api/documents/upload"
+    },
+    {
+        "id": 13,
+        "project_name": "SocialWave",
+        "domain": "Social Media",
+        "requirements": "User profiles, post feed, like/comment, messaging, notifications, realâ€‘time updates.",
+        "modules": [
+            "User Profiles",
+            "Post Feed",
+            "Like/Comment",
+            "Messaging",
+            "Notifications",
+            "Real-time Updates"
+        ],
+        "complexity_vector": [
+            2.9,
+            230,
+            3.3,
+            0.32,
+            0.7
+        ],
+        "fpa_effort_pm": 27.0,
+        "cocomo_effort_pm": 29.0,
+        "ucp_effort_pm": 25.5,
+        "actual_effort_pm": 29.0,
+        "tech_stack": "Go, React, Cassandra, Redis, WebSocket",
+        "outcome": "delayed",
+        "code_structure": "# SocialWave — Social Media Code Structure\n\n## Backend (Go)\n`\nbackend/\n├── handlers/\n│   ├── auth.go               # JWT, signup/login\n│   ├── posts.go              # Create feed, like, comment\n│   ├── profiles.go           # User profiles\n│   ├── messaging.go          # WebSocket chat\n│   └── notifications.go      # Real-time events\n├── services/\n│   ├── feed_service.go       # Timeline generation\n│   ├── websocket_hub.go      # Connection management\n│   └── notification_service.go\n├── models/\n│   ├── user.go\n│   ├── post.go\n│   ├── message.go\n│   └── notification.go\n└── repository/\n    ├── cassandra.go\n    └── redis.go\n`\n\n## Frontend (React)\n`\nsrc/\n├── pages/\n│   ├── Feed.tsx              # Infinite scroll\n│   ├── Profile.tsx           # User posts, bio\n│   ├── Messaging.tsx         # Chat list, room\n│   └── Notifications.tsx\n├── components/\n│   ├── PostCard.tsx\n│   ├── CommentSection.tsx\n│   ├── ChatWindow.tsx\n│   └── LikeButton.tsx\n└── lib/\n    ├── websocket.ts\n    └── api.ts\n`\n\n## Database (Cassandra + Redis)\n- users, posts, comments, likes, messages, notifications\n- Redis: session cache, feed cache\n\n## Key APIs\n- POST /api/posts\n- GET /api/feed?page=\n- POST /api/posts/{id}/like\n- WebSocket /ws/chat"
+    },
+    {
+        "id": 14,
+        "project_name": "InventoryIQ",
+        "domain": "Retail",
+        "requirements": "Stock management, purchase orders, supplier management, barcode scanner, lowâ€‘stock alerts.",
+        "modules": [
+            "Stock Management",
+            "Purchase Orders",
+            "Supplier Management",
+            "Barcode Scanner",
+            "Low-stock Alerts"
+        ],
+        "complexity_vector": [
+            2.0,
+            125,
+            4.2,
+            0.14,
+            0.3
+        ],
+        "fpa_effort_pm": 13.0,
+        "cocomo_effort_pm": 14.5,
+        "ucp_effort_pm": 12.0,
+        "actual_effort_pm": 13.0,
+        "tech_stack": "Python/Flask, React Native, SQLite, Zebra SDK",
+        "outcome": "on_time",
+        "code_structure": "# InventoryIQ — Retail Inventory Code Structure\n\n## Backend (Flask)\n`\nbackend/\n├── app.py                   # Main entry\n├── routes/\n│   ├── stock.py             # Stock levels, movements\n│   ├── purchase_orders.py   # Create, receive\n│   ├── suppliers.py         # CRUD\n│   ├── barcode.py           # Scan lookup\n│   └── alerts.py            # Low-stock check\n├── models/\n│   ├── product.py\n│   ├── stock_movement.py\n│   ├── purchase_order.py\n│   └── supplier.py\n└── services/\n    ├── barcode_service.py   # Zebra SDK integration\n    └── alert_service.py     # Email/SMS alerts\n`\n\n## Frontend (React Native)\n`\nsrc/\n├── screens/\n│   ├── HomeScreen.js        # Dashboard, low-stock warn\n│   ├── StockScreen.js       # Inventory list, adjust\n│   ├── PurchaseOrders.js\n│   ├── Suppliers.js\n│   └── BarcodeScanner.js    # Camera + Zebra SDK\n├── components/\n│   ├── StockCard.js\n│   └── AlertBadge.js\n└── utils/\n    └── api.js\n`\n\n## Database (SQLite)\n- products, stock_movements, purchase_orders, suppliers\n\n## Key APIs\n- GET /api/stock?low_only=true\n- POST /api/purchase-orders\n- POST /api/barcode/lookup\n- GET /api/alerts/low-stock"
+    },
+    {
+        "id": 15,
+        "project_name": "BankOn",
+        "domain": "Fintech",
+        "requirements": "Account management, fund transfer, transaction alerts, statement download, customer support chat.",
+        "modules": [
+            "Account Management",
+            "Fund Transfer",
+            "Transaction Alerts",
+            "Statement Download",
+            "Customer Support Chat"
+        ],
+        "complexity_vector": [
+            3.0,
+            235,
+            3.1,
+            0.25,
+            0.8
+        ],
+        "fpa_effort_pm": 29.0,
+        "cocomo_effort_pm": 31.0,
+        "ucp_effort_pm": 27.0,
+        "actual_effort_pm": 31.5,
+        "tech_stack": "Java/Spring Boot, React, Oracle, Twilio, WebSocket",
+        "outcome": "over_budget",
+        "code_structure": "# BankOn — Fintech Banking Code Structure\n\n## Backend (Spring Boot)\n`\nsrc/main/java/com/bankon/\n├── controllers/\n│   ├── AccountController.java       # balance, details\n│   ├── TransferController.java      # fund transfer\n│   ├── AlertController.java         # transaction alerts\n│   ├── StatementController.java     # PDF download\n│   └── ChatController.java          # support WebSocket\n├── services/\n│   ├── TransferService.java         # atomic transfers\n│   ├── TwilioAlertService.java\n│   ├── PDFStatementService.java\n│   └── ChatMessageService.java\n├── models/\n│   ├── Account.java\n│   ├── Transaction.java\n│   ├── AlertPreference.java\n│   └── ChatMessage.java\n└── config/\n    ├── WebSocketConfig.java\n    └── SecurityConfig.java\n`\n\n## Frontend (React)\n`\nsrc/\n├── pages/\n│   ├── Dashboard.tsx                # accounts, balance\n│   ├── Transfer.tsx                 # IMPS/NEFT/RTGS\n│   ├── Alerts.tsx                   # preferences\n│   ├── Statements.tsx               # download\n│   └── ChatSupport.tsx              # live chat\n├── components/\n│   ├── BalanceCard.tsx\n│   ├── TransactionList.tsx\n│   └── ChatWindow.tsx\n└── lib/\n    └── websocket.ts\n`\n\n## Database (Oracle)\n- accounts, transactions, alert_preferences, chat_messages\n\n## Key APIs\n- GET /api/accounts/{id}/balance\n- POST /api/transfer\n- POST /api/alerts/configure\n- GET /api/statements/{accountId}?month="
+    },
+    {
+        "id": 16,
+        "project_name": "EventPro",
+        "domain": "Event Management",
+        "requirements": "Event creation, ticket sales, QR checkâ€‘in, attendee list, email campaigns.",
+        "modules": [
+            "Event Creation",
+            "Ticket Sales",
+            "QR Check-in",
+            "Attendee List",
+            "Email Campaigns"
+        ],
+        "complexity_vector": [
+            2.5,
+            175,
+            3.4,
+            0.23,
+            0.6
+        ],
+        "fpa_effort_pm": 20.0,
+        "cocomo_effort_pm": 22.0,
+        "ucp_effort_pm": 19.5,
+        "actual_effort_pm": 21.0,
+        "tech_stack": "Laravel, Vue, MySQL, Mailchimp, QRCode library",
+        "outcome": "on_time",
+        "code_structure": "# EventPro — Event Management Code Structure\n\n## Backend (Laravel)\n`\napp/\n├── Http/\n│   ├── Controllers/\n│   │   ├── EventController.php       # CRUD\n│   │   ├── TicketController.php      # Sales, pricing\n│   │   ├── CheckinController.php     # QR scan\n│   │   ├── AttendeeController.php\n│   │   └── EmailCampaignController.php # Mailchimp\n│   └── Middleware/\n├── Models/\n│   ├── Event.php\n│   ├── Ticket.php\n│   ├── Attendee.php\n│   └── Campaign.php\n├── Services/\n│   ├── QRCodeService.php             # Generate QR\n│   ├── MailchimpService.php\n│   └── TicketService.php\n└── Jobs/\n    └── SendCampaignJob.php\n`\n\n## Frontend (Vue.js)\n`\nsrc/\n├── views/\n│   ├── Events.vue                    # List, create\n│   ├── EventDetail.vue               # Tickets, attendees\n│   ├── Checkin.vue                   # QR scanner\n│   ├── Attendees.vue\n│   └── Campaigns.vue                 # Email builder\n├── components/\n│   ├── QRScanner.vue\n│   ├── TicketWidget.vue\n│   └── AttendeeTable.vue\n└── store/\n    └── event.js\n`\n\n## Database (MySQL)\n- events, tickets, attendees, campaigns, qr_codes\n\n## Key APIs\n- POST /api/events\n- POST /api/tickets/purchase\n- POST /api/checkin/{attendeeId}\n- POST /api/campaigns/send"
+    },
+    {
+        "id": 17,
+        "project_name": "DocuShare",
+        "domain": "Document Management",
+        "requirements": "File upload, folder tree, permission control, version history, fullâ€‘text search.",
+        "modules": [
+            "File Upload",
+            "Folder Tree",
+            "Permission Control",
+            "Version History",
+            "Full-text Search"
+        ],
+        "complexity_vector": [
+            2.3,
+            145,
+            3.8,
+            0.17,
+            0.5
+        ],
+        "fpa_effort_pm": 15.5,
+        "cocomo_effort_pm": 17.0,
+        "ucp_effort_pm": 14.0,
+        "actual_effort_pm": 16.0,
+        "tech_stack": "Django, React, MinIO, Elasticsearch",
+        "outcome": "on_time",
+        "code_structure": "# DocuShare — Document Management Code Structure\n\n## Backend (Django)\n`\nbackend/\n├── apps/\n│   ├── files/                # Upload, download, streaming\n│   ├── folders/              # Tree structure, CRUD\n│   ├── permissions/          # ACL (users/groups)\n│   ├── versions/             # Versioning, diff\n│   └── search/               # Elasticsearch indexing\n├── services/\n│   ├── minio_service.py      # S3-compatible storage\n│   ├── elasticsearch_service.py\n│   └── permission_service.py\n└── api/\n    └── urls.py\n`\n\n## Frontend (React)\n`\nsrc/\n├── pages/\n│   ├── Drive.tsx             # Folder tree, file list\n│   ├── FileViewer.tsx        # Preview (PDF, image)\n│   ├── Versions.tsx          # History, restore\n│   ├── Permissions.tsx       # Share dialog\n│   └── Search.tsx            # Full-text results\n├── components/\n│   ├── FolderTree.tsx\n│   ├── FileUploader.tsx\n│   └── VersionSlider.tsx\n└── lib/\n    └── api.ts\n`\n\n## Storage (MinIO)\n- file objects\n\n## Database (PostgreSQL + Elasticsearch)\n- files, folders, permissions, versions\n- Elasticsearch: full-text index\n\n## Key APIs\n- POST /api/files/upload\n- GET /api/folders/tree\n- PUT /api/permissions/{fileId}\n- GET /api/search?q="
+    },
+    {
+        "id": 18,
+        "project_name": "GymBuddy",
+        "domain": "Fitness",
+        "requirements": "Workout planner, exercise library, progress tracking, diet log, trainer booking.",
+        "modules": [
+            "Workout Planner",
+            "Exercise Library",
+            "Progress Tracking",
+            "Diet Log",
+            "Trainer Booking"
+        ],
+        "complexity_vector": [
+            2.1,
+            135,
+            4.0,
+            0.18,
+            0.4
+        ],
+        "fpa_effort_pm": 14.5,
+        "cocomo_effort_pm": 16.0,
+        "ucp_effort_pm": 13.5,
+        "actual_effort_pm": 14.5,
+        "tech_stack": "Node.js, React Native, MongoDB, Chart.js",
+        "outcome": "on_time",
+        "code_structure": "# GymBuddy — Fitness App Code Structure\n\n## Backend (Node.js/Express)\n`\nsrc/\n├── routes/\n│   ├── workouts.js           # Planner, routines\n│   ├── exercises.js          # Library, muscles\n│   ├── progress.js           # Weight, measurements\n│   ├── diet.js               # Food log, macros\n│   └── trainers.js           # Booking, availability\n├── services/\n│   ├── workoutGenerator.js   # AI-based routines\n│   ├── calorieCalculator.js\n│   └── bookingService.js\n├── models/\n│   ├── User.js\n│   ├── WorkoutPlan.js\n│   ├── Exercise.js\n│   ├── ProgressLog.js\n│   ├── DietEntry.js\n│   └── Booking.js\n└── middleware/\n    └── auth.js\n`\n\n## Frontend (React Native)\n`\nsrc/\n├── screens/\n│   ├── HomeScreen.js         # Today's workout\n│   ├── WorkoutPlanner.js     # Create, edit routines\n│   ├── ExerciseLibrary.js    # Filter by muscle\n│   ├── ProgressScreen.js     # Charts (weight, reps)\n│   ├── DietLog.js            # Meal entry\n│   └── TrainerBooking.js\n├── components/\n│   ├── ExerciseCard.js\n│   ├── ProgressChart.js\n│   └── MealInput.js\n└── utils/\n    └── api.js\n`\n\n## Database (MongoDB)\n- users, workout_plans, exercises, progress_logs, diet_entries, bookings\n\n## Key APIs\n- GET /api/workouts/plan/{userId}\n- POST /api/progress/log\n- POST /api/diet/add\n- POST /api/trainers/book"
+    },
+    {
+        "id": 19,
+        "project_name": "LegalEase",
+        "domain": "Legal Tech",
+        "requirements": "Case management, document generation, deadline tracker, client portal, billing.",
+        "modules": [
+            "Case Management",
+            "Document Generation",
+            "Deadline Tracker",
+            "Client Portal",
+            "Billing"
+        ],
+        "complexity_vector": [
+            2.6,
+            185,
+            3.2,
+            0.26,
+            0.6
+        ],
+        "fpa_effort_pm": 21.0,
+        "cocomo_effort_pm": 23.0,
+        "ucp_effort_pm": 20.0,
+        "actual_effort_pm": 23.0,
+        "tech_stack": "Ruby on Rails, React, PostgreSQL, Docx generator",
+        "outcome": "delayed",
+        "code_structure": "# LegalEase — Legal Tech Code Structure\n\n## Backend (Ruby on Rails)\n`\napp/\n├── controllers/\n│   ├── cases_controller.rb          # CRUD, status\n│   ├── documents_controller.rb      # Generate, templates\n│   ├── deadlines_controller.rb      # Calendar, alerts\n│   ├── client_portal_controller.rb\n│   └── billing_controller.rb        # Invoices, payments\n├── models/\n│   ├── case.rb\n│   ├── document.rb\n│   ├── deadline.rb\n│   ├── client.rb\n│   └── invoice.rb\n├── services/\n│   ├── docx_generator.rb            # Word documents\n│   ├── deadline_notifier.rb         # Email reminders\n│   └── billing_service.rb\n└── jobs/\n    └── deadline_check_job.rb\n`\n\n## Frontend (React)\n`\nsrc/\n├── pages/\n│   ├── Cases.tsx                    # List, search\n│   ├── CaseDetail.tsx               # Timeline, documents\n│   ├── Documents.tsx                # Generate, download\n│   ├── Deadlines.tsx                # Calendar view\n│   ├── ClientPortal.tsx\n│   └── Billing.tsx\n├── components/\n│   ├── DeadlineCalendar.tsx\n│   ├── DocumentTemplatePicker.tsx\n│   └── InvoiceTable.tsx\n└── lib/\n    └── api.ts\n`\n\n## Database (PostgreSQL)\n- cases, documents, deadlines, clients, invoices\n\n## Key APIs\n- POST /api/cases\n- POST /api/documents/generate\n- GET /api/deadlines/upcoming\n- GET /api/billing/invoices"
+    },
+    {
+        "id": 20,
+        "project_name": "RecruitPro",
+        "domain": "HR",
+        "requirements": "Job posting, resume parser, candidate ranking, interview scheduler, offer letter generator.",
+        "modules": [
+            "Job Posting",
+            "Resume Parser",
+            "Candidate Ranking",
+            "Interview Scheduler",
+            "Offer Letter Generator"
+        ],
+        "complexity_vector": [
+            2.4,
+            165,
+            3.5,
+            0.21,
+            0.5
+        ],
+        "fpa_effort_pm": 18.5,
+        "cocomo_effort_pm": 20.5,
+        "ucp_effort_pm": 17.5,
+        "actual_effort_pm": 19.0,
+        "tech_stack": "Python/Flask, React, Elasticsearch, NLTK",
+        "outcome": "on_time",
+        "code_structure": "# RecruitPro — HR Recruitment Code Structure\n\n## Backend (Flask)\n`\nbackend/\n├── app.py\n├── routes/\n│   ├── jobs.py               # Post, edit, close\n│   ├── resumes.py            # Upload, parse\n│   ├── ranking.py            # ML ranking\n│   ├── interviews.py         # Schedule, calendar\n│   └── offers.py             # Generate PDF\n├── services/\n│   ├── resume_parser.py      # NLTK + NLP\n│   ├── ranking_model.py      # sklearn similarity\n│   ├── calendar_service.py   # Google Calendar API\n│   └── pdf_generator.py\n├── models/\n│   ├── Job.py\n│   ├── Candidate.py\n│   ├── Resume.py\n│   ├── Interview.py\n│   └── Offer.py\n└── utils/\n    └── elasticsearch.py\n`\n\n## Frontend (React)\n`\nsrc/\n├── pages/\n│   ├── JobBoard.tsx          # Open jobs\n│   ├── PostJob.tsx\n│   ├── Candidates.tsx        # Ranked list\n│   ├── ResumeParser.tsx      # Upload & preview\n│   ├── ScheduleInterview.tsx\n│   └── OfferLetter.tsx\n├── components/\n│   ├── RankedCandidateCard.tsx\n│   ├── CalendarPicker.tsx\n│   └── OfferPreview.tsx\n└── lib/\n    └── api.ts\n`\n\n## Database (PostgreSQL)\n- jobs, candidates, resumes, interviews, offers\n\n## Key APIs\n- POST /api/jobs\n- POST /api/resumes/parse\n- GET /api/candidates/rank?jobId=\n- POST /api/interviews/schedule"
+    },
+    {
+        "id": 21,
+        "project_name": "TicketFlow",
+        "domain": "Customer Support",
+        "requirements": "Ticket creation, assignment, SLA tracking, knowledge base, live chat.",
+        "modules": [
+            "Ticket Creation",
+            "Assignment",
+            "SLA Tracking",
+            "Knowledge Base",
+            "Live Chat"
+        ],
+        "complexity_vector": [
+            2.2,
+            150,
+            3.6,
+            0.2,
+            0.4
+        ],
+        "fpa_effort_pm": 16.0,
+        "cocomo_effort_pm": 17.5,
+        "ucp_effort_pm": 15.0,
+        "actual_effort_pm": 16.5,
+        "tech_stack": "PHP/Laravel, Vue, MySQL, WebSocket",
+        "outcome": "on_time",
+        "code_structure": "# TicketFlow — Customer Support Code Structure\n\n## Backend (Laravel)\n`\napp/\n├── Http/\n│   ├── Controllers/\n│   │   ├── TicketController.php      # Create, update, status\n│   │   ├── AssignmentController.php  # Round-robin\n│   │   ├── SLAController.php         # Response/resolution times\n│   │   ├── KnowledgeBaseController.php\n│   │   └── ChatController.php        # WebSocket\n│   └── Middleware/\n├── Models/\n│   ├── Ticket.php\n│   ├── Assignment.php\n│   ├── SLAViolation.php\n│   ├── Article.php\n│   └── ChatMessage.php\n├── Services/\n│   ├── SLAMonitor.php\n│   └── WebSocketBroadcaster.php\n└── Events/\n    └── NewChatMessage.php\n`\n\n## Frontend (Vue.js)\n`\nsrc/\n├── views/\n│   ├── Dashboard.vue                  # Ticket stats\n│   ├── TicketList.vue\n│   ├── TicketDetail.vue               # Conversation\n│   ├── KnowledgeBase.vue              # Search articles\n│   └── LiveChat.vue                   # Agent/customer\n├── components/\n│   ├── SLATimer.vue\n│   ├── ChatWidget.vue\n│   └── ArticleViewer.vue\n└── store/\n    └── ticket.js\n`\n\n## Database (MySQL)\n- tickets, assignments, sla_violations, kb_articles, chat_messages\n\n## Key APIs\n- POST /api/tickets\n- PUT /api/tickets/{id}/assign\n- GET /api/sla/check/{ticketId}\n- WebSocket /ws/chat"
+    },
+    {
+        "id": 22,
+        "project_name": "FoodDash",
+        "domain": "Food Delivery",
+        "requirements": "Restaurant listing, menu browser, order placement, realâ€‘time tracking, payment, rating.",
+        "modules": [
+            "Restaurant Listing",
+            "Menu Browser",
+            "Order Placement",
+            "Real-time Tracking",
+            "Payment",
+            "Rating"
+        ],
+        "complexity_vector": [
+            2.8,
+            210,
+            3.1,
+            0.29,
+            0.7
+        ],
+        "fpa_effort_pm": 25.0,
+        "cocomo_effort_pm": 27.0,
+        "ucp_effort_pm": 23.5,
+        "actual_effort_pm": 27.0,
+        "tech_stack": "Node.js, React, PostgreSQL, Redis, Stripe, Socket.io",
+        "outcome": "delayed",
+        "code_structure": "# FoodDash — Food Delivery Code Structure\n\n## Backend (Node.js/Express)\n`\nsrc/\n├── routes/\n│   ├── restaurants.js         # Listing, search\n│   ├── menu.js                # Items, options\n│   ├── orders.js              # Place, status\n│   ├── tracking.js            # Real-time location\n│   ├── payments.js            # Stripe\n│   └── ratings.js             # Reviews\n├── services/\n│   ├── geocodingService.js    # Distance calculation\n│   ├── deliveryTracking.js    # Socket.io\n│   ├── paymentService.js\n│   └── notificationService.js\n├── models/\n│   ├── Restaurant.js\n│   ├── MenuItem.js\n│   ├── Order.js\n│   ├── DeliveryLocation.js\n│   └── Rating.js\n└── middleware/\n    └── auth.js\n`\n\n## Frontend (React)\n`\nsrc/\n├── pages/\n│   ├── Home.tsx               # Restaurant list\n│   ├── Restaurant.tsx         # Menu, cart\n│   ├── Checkout.tsx\n│   ├── OrderTracking.tsx      # Live map\n│   └── Ratings.tsx\n├── components/\n│   ├── RestaurantCard.tsx\n│   ├── MenuItem.tsx\n│   ├── LiveMap.tsx            # Mapbox\n│   └── RatingStars.tsx\n└── lib/\n    ├── socket.ts\n    └── stripe.ts\n`\n\n## Database (PostgreSQL + Redis)\n- restaurants, menu_items, orders, delivery_locations, ratings\n- Redis: session, real-time tracking\n\n## Key APIs\n- GET /api/restaurants?lat=&lng=\n- POST /api/orders\n- GET /api/orders/{id}/track\n- POST /api/ratings"
+    },
+    {
+        "id": 23,
+        "project_name": "PropManage",
+        "domain": "Property Management",
+        "requirements": "Tenant management, rent collection, maintenance requests, lease agreements, financial reports.",
+        "modules": [
+            "Tenant Management",
+            "Rent Collection",
+            "Maintenance Requests",
+            "Lease Agreements",
+            "Financial Reports"
+        ],
+        "complexity_vector": [
+            2.5,
+            170,
+            3.4,
+            0.24,
+            0.5
+        ],
+        "fpa_effort_pm": 19.0,
+        "cocomo_effort_pm": 21.0,
+        "ucp_effort_pm": 18.0,
+        "actual_effort_pm": 20.0,
+        "tech_stack": "Django, React, PostgreSQL, Stripe",
+        "outcome": "on_time",
+        "code_structure": "# PropManage — Property Management Code Structure\n\n## Backend (Django)\n`\nbackend/\n├── apps/\n│   ├── tenants/              # Profiles, leases\n│   ├── rent/                 # Collection, invoices\n│   ├── maintenance/          # Requests, work orders\n│   ├── leases/               # Agreements, renewals\n│   └── finances/             # Reports, P&L\n├── services/\n│   ├── stripe_service.py     # Rent payment\n│   ├── pdf_generator.py      # Lease agreements\n│   └── report_service.py\n└── api/\n    └── urls.py\n`\n\n## Frontend (React)\n`\nsrc/\n├── pages/\n│   ├── Dashboard.tsx         # Occupancy, revenue\n│   ├── Tenants.tsx           # List, add, pay rent\n│   ├── Maintenance.tsx       # Requests, status\n│   ├── Leases.tsx            # Upload, sign\n│   └── Reports.tsx           # Financials\n├── components/\n│   ├── RentPaymentButton.tsx\n│   ├── MaintenanceCard.tsx\n│   └── LeaseViewer.tsx\n└── lib/\n    └── stripe.ts\n`\n\n## Database (PostgreSQL)\n- tenants, properties, rent_payments, maintenance_requests, leases, financial_transactions\n\n## Key APIs\n- GET /api/tenants?propertyId=\n- POST /api/rent/collect\n- POST /api/maintenance/request\n- GET /api/finances/report?month="
+    },
+    {
+        "id": 24,
+        "project_name": "MedAlert",
+        "domain": "Healthcare",
+        "requirements": "Medication reminders, symptom tracker, appointment scheduler, doctor chat, insurance card.",
+        "modules": [
+            "Medication Reminders",
+            "Symptom Tracker",
+            "Appointment Scheduler",
+            "Doctor Chat",
+            "Insurance Card"
+        ],
+        "complexity_vector": [
+            2.7,
+            195,
+            3.0,
+            0.31,
+            0.6
+        ],
+        "fpa_effort_pm": 23.0,
+        "cocomo_effort_pm": 25.0,
+        "ucp_effort_pm": 21.5,
+        "actual_effort_pm": 25.0,
+        "tech_stack": "Flutter, Firebase, Node.js, Twilio",
+        "outcome": "delayed",
+        "code_structure": "# MedAlert — Healthcare Reminder Code Structure\n\n## Backend (Node.js/Express + Firebase)\n`\nfunctions/\n├── index.js                 # Cloud Functions\n├── routes/\n│   ├── medications.js       # Reminders CRUD\n│   ├── symptoms.js          # Log tracker\n│   ├── appointments.js      # Scheduler\n│   ├── chat.js              # Doctor chat (Twilio)\n│   └── insurance.js         # Card upload\n├── services/\n│   ├── pushNotification.js  # FCM\n│   ├── twilioChat.js\n│   └── reminderScheduler.js # Cron\n└── models/\n    └── (Firestore collections)\n`\n\n## Frontend (Flutter)\n`\nlib/\n├── screens/\n│   ├── home_screen.dart         # Today's reminders\n│   ├── medications_screen.dart  # Add/edit, schedule\n│   ├── symptom_tracker.dart     # Log symptoms\n│   ├── appointments_screen.dart\n│   ├── chat_screen.dart         # Doctor chat\n│   └── insurance_screen.dart    # Upload card image\n├── widgets/\n│   ├── reminder_card.dart\n│   ├── symptom_chart.dart\n│   └── chat_bubble.dart\n└── services/\n    ├── api_service.dart\n    └── notification_service.dart\n`\n\n## Database (Firebase Firestore)\n- users, medications, symptom_logs, appointments, chat_messages, insurance_cards\n\n## Key APIs\n- POST /api/medications/remind\n- POST /api/symptoms/log\n- GET /api/appointments/upcoming\n- POST /api/chat/send"
+    },
+    {
+        "id": 25,
+        "project_name": "ShopAnalytics",
+        "domain": "E-commerce Analytics",
+        "requirements": "Sales dashboard, customer segmentation, inventory forecasting, recommendation engine, realâ€‘time metrics.",
+        "modules": [
+            "Sales Dashboard",
+            "Customer Segmentation",
+            "Inventory Forecasting",
+            "Recommendation Engine",
+            "Real-time Metrics"
+        ],
+        "complexity_vector": [
+            2.9,
+            225,
+            3.2,
+            0.28,
+            0.8
+        ],
+        "fpa_effort_pm": 27.0,
+        "cocomo_effort_pm": 29.0,
+        "ucp_effort_pm": 25.0,
+        "actual_effort_pm": 29.5,
+        "tech_stack": "Python/FastAPI, React, ClickHouse, Redis, Kafka",
+        "outcome": "over_budget",
+        "code_structure": "# ShopAnalytics — E-commerce Analytics Code Structure\n\n## Backend (FastAPI)\n`\nbackend/\n├── routers/\n│   ├── sales.py              # Dashboard metrics\n│   ├── segmentation.py       # RFM, clustering\n│   ├── forecasting.py        # Inventory prediction\n│   ├── recommendations.py    # Collaborative filtering\n│   └── realtime.py           # WebSocket metrics\n├── services/\n│   ├── clickhouse_service.py # OLAP queries\n│   ├── kafka_consumer.py     # Real-time events\n│   ├── ml_models.py          # sklearn, prophet\n│   └── recommendation_engine.py\n├── models/\n│   └── (ClickHouse tables)\n└── utils/\n    └── redis_cache.py\n`\n\n## Frontend (React)\n`\nsrc/\n├── pages/\n│   ├── Dashboard.tsx         # Live KPIs, charts\n│   ├── Segmentation.tsx      # Customer clusters\n│   ├── Forecasting.tsx       # Stock predictions\n│   ├── Recommendations.tsx   # Product suggestions\n│   └── Realtime.tsx          # WebSocket stream\n├── components/\n│   ├── SalesChart.tsx\n│   ├── ClusterVisualization.tsx\n│   ├── ForecastPlot.tsx\n│   └── RealtimeCounter.tsx\n└── lib/\n    ├── websocket.ts\n    └── api.ts\n`\n\n## Database (ClickHouse + Redis)\n- sales_events, customer_segments, inventory_forecasts, recommendations\n- Redis: real-time aggregations\n\n## Key APIs\n- GET /api/sales/daily?date=\n- GET /api/segmentation/rfm\n- POST /api/forecast/inventory\n- GET /api/recommendations/{userId}"
+    },
+    {
+        "id": 26,
+        "project_name": "JobBoardExpress",
+        "domain": "Recruitment",
+        "requirements": "Job search, company profiles, resume builder, application tracker, employer dashboard.",
+        "modules": [
+            "Job Search",
+            "Company Profiles",
+            "Resume Builder",
+            "Application Tracker",
+            "Employer Dashboard"
+        ],
+        "complexity_vector": [
+            2.3,
+            155,
+            3.7,
+            0.19,
+            0.5
+        ],
+        "fpa_effort_pm": 17.0,
+        "cocomo_effort_pm": 19.0,
+        "ucp_effort_pm": 16.0,
+        "actual_effort_pm": 18.0,
+        "tech_stack": "Ruby on Rails, React, PostgreSQL, Elasticsearch",
+        "outcome": "on_time",
+        "code_structure": "# JobBoardExpress — Recruitment Platform Code Structure\n\n## Backend (Ruby on Rails)\n`\napp/\n├── controllers/\n│   ├── jobs_controller.rb          # Search, filters\n│   ├── companies_controller.rb     # Profiles\n│   ├── resumes_controller.rb       # Builder, export\n│   ├── applications_controller.rb  # Tracker\n│   └── employer_dashboard_controller.rb\n├── models/\n│   ├── job.rb\n│   ├── company.rb\n│   ├── resume.rb\n│   ├── application.rb\n│   └── employer.rb\n├── services/\n│   ├── elasticsearch_service.rb    # Job search\n│   ├── pdf_resume_generator.rb\n│   └── application_status_notifier.rb\n└── jobs/\n    └── send_application_email_job.rb\n`\n\n## Frontend (React)\n`\nsrc/\n├── pages/\n│   ├── JobSearch.tsx               # Search bar, filters\n│   ├── CompanyProfile.tsx\n│   ├── ResumeBuilder.tsx           # Step-by-step\n│   ├── Applications.tsx            # Status timeline\n│   └── EmployerDashboard.tsx       # Applicants, stats\n├── components/\n│   ├── JobCard.tsx\n│   ├── ResumeForm.tsx\n│   └── ApplicationStatusBadge.tsx\n└── lib/\n    └── api.ts\n`\n\n## Database (PostgreSQL + Elasticsearch)\n- jobs, companies, resumes, applications, employers\n- Elasticsearch: job index\n\n## Key APIs\n- GET /api/jobs/search?q=&location=\n- POST /api/resumes/build\n- POST /api/applications/submit\n- GET /api/employer/dashboard"
+    },
+    {
+        "id": 27,
+        "project_name": "AuctionHouse",
+        "domain": "Marketplace",
+        "requirements": "Product listing, bidding system, automatic outbid notifications, payment escrow, seller rating.",
+        "modules": [
+            "Product Listing",
+            "Bidding System",
+            "Automatic Outbid Notifications",
+            "Payment Escrow",
+            "Seller Rating"
+        ],
+        "complexity_vector": [
+            2.6,
+            190,
+            3.3,
+            0.27,
+            0.6
+        ],
+        "fpa_effort_pm": 22.0,
+        "cocomo_effort_pm": 24.0,
+        "ucp_effort_pm": 20.5,
+        "actual_effort_pm": 24.0,
+        "tech_stack": "Node.js, Vue, MongoDB, Redis, Socket.io",
+        "outcome": "delayed",
+        "code_structure": "# AuctionHouse — Marketplace Auction Code Structure\n\n## Backend (Node.js/Express)\n`\nsrc/\n├── routes/\n│   ├── listings.js           # Create, read, end\n│   ├── bids.js               # Place bid, auto-bid\n│   ├── notifications.js      # Outbid alerts\n│   ├── escrow.js             # Payment hold\n│   └── ratings.js            # Seller reviews\n├── services/\n│   ├── bidEngine.js          # Real-time bidding (Socket.io)\n│   ├── escrowService.js      # Stripe Connect\n│   ├── notificationService.js\n│   └── auctionScheduler.js   # End auction cron\n├── models/\n│   ├── Listing.js\n│   ├── Bid.js\n│   ├── Notification.js\n│   ├── EscrowTransaction.js\n│   └── Rating.js\n└── sockets/\n    └── auction.js            # Live bid updates\n`\n\n## Frontend (Vue.js)\n`\nsrc/\n├── views/\n│   ├── Home.vue              # Active listings\n│   ├── ListingDetail.vue     # Bid form, price history\n│   ├── PlaceBid.vue\n│   ├── Notifications.vue\n│   ├── EscrowPayment.vue\n│   └── Ratings.vue\n├── components/\n│   ├── BidHistoryChart.vue\n│   ├── OutbidAlert.vue\n│   └── CountdownTimer.vue\n└── store/\n    └── auction.js\n`\n\n## Database (MongoDB + Redis)\n- listings, bids, notifications, escrow_transactions, ratings\n- Redis: current highest bid cache\n\n## Key APIs\n- POST /api/listings\n- POST /api/bids/place\n- GET /api/notifications/unread\n- POST /api/escrow/release"
+    },
+    {
+        "id": 28,
+        "project_name": "TaskMate",
+        "domain": "Productivity",
+        "requirements": "Task boards, dragâ€‘drop, due dates, team collaboration, file attachments.",
+        "modules": [
+            "Task Boards",
+            "Drag-drop",
+            "Due Dates",
+            "Team Collaboration",
+            "File Attachments"
+        ],
+        "complexity_vector": [
+            2.0,
+            120,
+            4.0,
+            0.12,
+            0.3
+        ],
+        "fpa_effort_pm": 12.0,
+        "cocomo_effort_pm": 13.5,
+        "ucp_effort_pm": 11.0,
+        "actual_effort_pm": 12.0,
+        "tech_stack": "Django, React, PostgreSQL, WebSocket",
+        "outcome": "on_time",
+        "code_structure": "# TaskMate — Productivity Task Management Code Structure\n\n## Backend (Django)\n`\nbackend/\n├── apps/\n│   ├── boards/               # Kanban boards\n│   ├── tasks/                # CRUD, drag-drop\n│   ├── due_dates/            # Deadlines, reminders\n│   ├── teams/                # Collaboration\n│   └── attachments/          # File uploads\n├── services/\n│   ├── websocket_notify.py   # Real-time updates\n│   └── file_storage.py       # S3/MinIO\n└── api/\n    └── urls.py\n`\n\n## Frontend (React)\n`\nsrc/\n├── pages/\n│   ├── Board.tsx             # Drag-drop columns\n│   ├── TaskDetail.tsx        # Comments, due date\n│   ├── Team.tsx              # Members, permissions\n│   └── Attachments.tsx\n├── components/\n│   ├── KanbanColumn.tsx\n│   ├── TaskCard.tsx\n│   ├── DueDatePicker.tsx\n│   └── FileUploader.tsx\n└── lib/\n    ├── dnd.js                # react-beautiful-dnd\n    └── websocket.ts\n`\n\n## Database (PostgreSQL)\n- boards, tasks, due_dates, team_members, attachments\n\n## Key APIs\n- GET /api/boards/{id}/tasks\n- PUT /api/tasks/{id}/position\n- POST /api/tasks/{id}/due-date\n- WebSocket /ws/board/{id}"
+    },
+    {
+        "id": 29,
+        "project_name": "CryptoX",
+        "domain": "Fintech",
+        "requirements": "Crypto wallet, price charts, buy/sell, transaction history, staking dashboard, realâ€‘time market data.",
+        "modules": [
+            "Crypto Wallet",
+            "Price Charts",
+            "Buy/Sell",
+            "Transaction History",
+            "Staking Dashboard",
+            "Real-time Market Data"
+        ],
+        "complexity_vector": [
+            3.2,
+            250,
+            2.9,
+            0.35,
+            0.9
+        ],
+        "fpa_effort_pm": 32.0,
+        "cocomo_effort_pm": 34.0,
+        "ucp_effort_pm": 30.0,
+        "actual_effort_pm": 35.0,
+        "tech_stack": "Go, React, TimescaleDB, WebSocket, Binance API",
+        "outcome": "over_budget",
+        "code_structure": "# CryptoX — Cryptocurrency Platform Code Structure\n\n## Backend (Go)\n`\nbackend/\n├── handlers/\n│   ├── wallet.go             # Create, balance\n│   ├── market.go             # Price, order book\n│   ├── trade.go              # Buy/sell\n│   ├── history.go            # Transactions\n│   ├── staking.go            # Rewards\n│   └── websocket.go          # Real-time prices\n├── services/\n│   ├── binance_client.go     # Market data\n│   ├── trade_executor.go\n│   ├── staking_calculator.go\n│   └── wallet_service.go\n├── models/\n│   ├── wallet.go\n│   ├── transaction.go\n│   ├── staking_position.go\n│   └── market_price.go\n└── repository/\n    └── timescaledb.go\n`\n\n## Frontend (React)\n`\nsrc/\n├── pages/\n│   ├── Dashboard.tsx         # Portfolio, charts\n│   ├── Trade.tsx             # Buy/sell form\n│   ├── Wallet.tsx            # Address, balance\n│   ├── History.tsx           # Transactions\n│   ├── Staking.tsx           # APR, staked amount\n│   └── MarketData.tsx        # Real-time candlesticks\n├── components/\n│   ├── PriceChart.tsx        # TradingView\n│   ├── OrderBook.tsx\n│   ├── StakingWidget.tsx\n│   └── WebSocketPrice.tsx\n└── lib/\n    └── websocket.ts\n`\n\n## Database (TimescaleDB)\n- wallets, transactions, staking_positions, market_prices (time-series)\n\n## Key APIs\n- GET /api/wallet/balance\n- POST /api/trade/buy\n- GET /api/history?asset=\n- WebSocket /ws/market"
+    },
+    {
+        "id": 30,
+        "project_name": "TravelWise",
+        "domain": "Travel",
+        "requirements": "Flight/hotel search, booking engine, itinerary builder, payment, reviews, price alerts.",
+        "modules": [
+            "Flight/Hotel Search",
+            "Booking Engine",
+            "Itinerary Builder",
+            "Payment",
+            "Reviews",
+            "Price Alerts"
+        ],
+        "complexity_vector": [
+            2.5,
+            185,
+            3.2,
+            0.24,
+            0.6
+        ],
+        "fpa_effort_pm": 21.0,
+        "cocomo_effort_pm": 23.0,
+        "ucp_effort_pm": 20.0,
+        "actual_effort_pm": 23.0,
+        "tech_stack": "Java/Spring, Angular, PostgreSQL, Redis, Stripe",
+        "outcome": "delayed",
+        "code_structure": "# TravelWise — Travel Booking Code Structure\n\n## Backend (Spring Boot)\n`\nsrc/main/java/com/travelwise/\n├── controllers/\n│   ├── SearchController.java        # Flights/hotels\n│   ├── BookingController.java       # Reserve, confirm\n│   ├── ItineraryController.java     # Build, share\n│   ├── PaymentController.java       # Stripe\n│   ├── ReviewController.java\n│   └── AlertController.java         # Price drop\n├── services/\n│   ├── AmadeusAPIService.java       # Flight search\n│   ├── BookingEngine.java\n│   ├── PriceAlertScheduler.java\n│   └── PDFItineraryService.java\n├── models/\n│   ├── FlightSearch.java\n│   ├── Booking.java\n│   ├── Itinerary.java\n│   └── PriceAlert.java\n└── config/\n    └── RedisCacheConfig.java\n`\n\n## Frontend (Angular)\n`\nsrc/app/\n├── modules/\n│   ├── search/                      # Form, results\n│   ├── booking/                     # Passenger details\n│   ├── itinerary/                   # Builder, PDF\n│   ├── payment/                     # Stripe Elements\n│   ├── reviews/ \n│   └── alerts/                      # Subscribe\n├── components/\n│   ├── flight-card/\n│   ├── hotel-card/\n│   └── price-graph/\n└── services/\n    └── api.service.ts\n`\n\n## Database (PostgreSQL + Redis)\n- bookings, itineraries, reviews, price_alerts\n- Redis: search cache\n\n## Key APIs\n- GET /api/search/flights?from=&to=&date=\n- POST /api/bookings\n- POST /api/itineraries/build\n- POST /api/alerts/subscribe"
+    },
+    {
+        "id": 31,
+        "project_name": "SmartHome",
+        "domain": "IoT",
+        "requirements": "Device management, scene automation, realâ€‘time sensor data, user roles, alert system, remote control.",
+        "modules": [
+            "Device Management",
+            "Scene Automation",
+            "Real-time Sensor Data",
+            "User Roles",
+            "Alert System",
+            "Remote Control"
+        ],
+        "complexity_vector": [
+            2.8,
+            215,
+            3.0,
+            0.3,
+            0.8
+        ],
+        "fpa_effort_pm": 26.0,
+        "cocomo_effort_pm": 28.0,
+        "ucp_effort_pm": 24.5,
+        "actual_effort_pm": 28.5,
+        "tech_stack": "Python/FastAPI, React, MQTT, InfluxDB, Docker",
+        "outcome": "delayed",
+        "code_structure": "# SmartHome — IoT Smart Home Code Structure\n\n## Backend (FastAPI)\n`\nbackend/\n├── routers/\n│   ├── devices.py            # Register, status\n│   ├── scenes.py             # Automation rules\n│   ├── sensors.py            # Real-time data\n│   ├── users.py              # Roles (admin, member)\n│   ├── alerts.py             # Thresholds, notifications\n│   └── remote.py             # Control commands\n├── services/\n│   ├── mqtt_client.py        # Publish/subscribe\n│   ├── influx_service.py     # Time-series storage\n│   ├── rule_engine.py        # Scene triggers\n│   └── alert_service.py\n├── models/\n│   ├── Device.py\n│   ├── Scene.py\n│   ├── SensorData.py\n│   └── Alert.py\n└── utils/\n    └── websocket_manager.py\n`\n\n## Frontend (React)\n`\nsrc/\n├── pages/\n│   ├── Dashboard.tsx         # Device grid, sensor gauges\n│   ├── Devices.tsx           # Add, configure\n│   ├── Scenes.tsx            # Create \"Good Night\" etc.\n│   ├── Automation.tsx        # IF-THEN rules\n│   ├── Alerts.tsx            # History\n│   └── RemoteControl.tsx     # Virtual switches\n├── components/\n│   ├── DeviceCard.tsx\n│   ├── SensorChart.tsx\n│   ├── SceneBuilder.tsx\n│   └── AlertBell.tsx\n└── lib/\n    └── mqtt.js\n`\n\n## Database (InfluxDB + PostgreSQL)\n- sensor_data (time-series), devices, scenes, alerts, users\n\n## Key APIs\n- POST /api/devices/register\n- GET /api/sensors/{deviceId}/latest\n- POST /api/scenes/trigger\n- WebSocket /ws/sensor-stream"
+    },
+    {
+        "id": 32,
+        "project_name": "LibrarySys",
+        "domain": "Education",
+        "requirements": "Book catalog, member management, borrowing/return, overdue fines, digital lending.",
+        "modules": [
+            "Book Catalog",
+            "Member Management",
+            "Borrowing/Return",
+            "Overdue Fines",
+            "Digital Lending"
+        ],
+        "complexity_vector": [
+            2.2,
+            140,
+            3.8,
+            0.16,
+            0.4
+        ],
+        "fpa_effort_pm": 14.5,
+        "cocomo_effort_pm": 16.0,
+        "ucp_effort_pm": 13.5,
+        "actual_effort_pm": 14.0,
+        "tech_stack": "PHP/Laravel, Vue, MySQL, Stripe",
+        "outcome": "on_time",
+        "code_structure": "# LibrarySys — Library Management Code Structure\n\n## Backend (Laravel)\n`\napp/\n├── Http/\n│   ├── Controllers/\n│   │   ├── BookController.php        # Catalog, search\n│   │   ├── MemberController.php      # Registration, cards\n│   │   ├── BorrowController.php      # Checkout, return\n│   │   ├── FineController.php        # Calculate, pay\n│   │   └── DigitalLendingController.php # E-books\n│   └── Middleware/\n├── Models/\n│   ├── Book.php\n│   ├── Member.php\n│   ├── BorrowRecord.php\n│   ├── Fine.php\n│   └── DigitalLoan.php\n├── Services/\n│   ├── FineCalculator.php\n│   ├── StripePayment.php\n│   └── DRMService.php                # Digital rights\n└── Jobs/\n    └── CheckOverdueBooks.php\n`\n\n## Frontend (Vue.js)\n`\nsrc/\n├── views/\n│   ├── Catalog.vue                   # Search, filters\n│   ├── BookDetail.vue                # Availability, borrow\n│   ├── MemberDashboard.vue           # Active loans, fines\n│   ├── BorrowHistory.vue\n│   ├── PayFine.vue\n│   └── DigitalLending.vue            # Epub reader\n├── components/\n│   ├── BookCard.vue\n│   ├── FineCounter.vue\n│   └── DueDateBadge.vue\n└── store/\n    └── library.js\n`\n\n## Database (MySQL)\n- books, members, borrow_records, fines, digital_loans\n\n## Key APIs\n- GET /api/books?search=\n- POST /api/borrow\n- POST /api/return\n- GET /api/members/{id}/fines"
+    },
+    {
+        "id": 33,
+        "project_name": "InsiderThreat",
+        "domain": "Security",
+        "requirements": "User behaviour analytics, anomaly detection, alert dashboard, log collection, investigation workflow.",
+        "modules": [
+            "User Behaviour Analytics",
+            "Anomaly Detection",
+            "Alert Dashboard",
+            "Log Collection",
+            "Investigation Workflow"
+        ],
+        "complexity_vector": [
+            3.4,
+            270,
+            2.7,
+            0.4,
+            0.9
+        ],
+        "fpa_effort_pm": 35.0,
+        "cocomo_effort_pm": 37.0,
+        "ucp_effort_pm": 33.0,
+        "actual_effort_pm": 39.0,
+        "tech_stack": "Python/Django, React, Elastic Stack, Kafka, scikitâ€‘learn",
+        "outcome": "over_budget",
+        "code_structure": "# InsiderThreat — Security Analytics Code Structure\n\n## Backend (Django)\n`\nbackend/\n├── apps/\n│   ├── uba/                  # User behavior analytics\n│   ├── anomalies/            # ML detection\n│   ├── alerts/               # Dashboard, rules\n│   ├── logs/                 # Collection (Kafka)\n│   └── investigations/       # Workflow, notes\n├── services/\n│   ├── kafka_consumer.py     # Stream logs\n│   ├── anomaly_detector.py   # Isolation Forest\n│   ├── alert_engine.py\n│   └── investigation_tracker.py\n├── models/\n│   ├── UserBehavior.py\n│   ├── AnomalyScore.py\n│   ├── Alert.py\n│   ├── LogEntry.py\n│   └── Investigation.py\n└── api/\n    └── urls.py\n`\n\n## Frontend (React)\n`\nsrc/\n├── pages/\n│   ├── Dashboard.tsx         # Alert heatmap, risk scores\n│   ├── UBA.tsx               # User timelines\n│   ├── Anomalies.tsx         # Detected events\n│   ├── Alerts.tsx            # Prioritized list\n│   ├── LogExplorer.tsx       # Elasticsearch query\n│   └── Investigations.tsx    # Assign, resolve\n├── components/\n│   ├── RiskGauge.tsx\n│   ├── AlertTable.tsx\n│   ├── InvestigationModal.tsx\n│   └── LogViewer.tsx\n└── lib/\n    └── api.ts\n`\n\n## Database (Elastic Stack + PostgreSQL)\n- Elasticsearch: logs, user behavior\n- PostgreSQL: alerts, investigations, anomaly scores\n\n## Key APIs\n- POST /api/logs/ingest\n- GET /api/anomalies/detect\n- GET /api/alerts?severity=\n- POST /api/investigations/start"
+    },
+    {
+        "id": 34,
+        "project_name": "PetCare",
+        "domain": "Veterinary",
+        "requirements": "Pet profiles, vaccination reminders, appointment booking, prescription refill, clinic management.",
+        "modules": [
+            "Pet Profiles",
+            "Vaccination Reminders",
+            "Appointment Booking",
+            "Prescription Refill",
+            "Clinic Management"
+        ],
+        "complexity_vector": [
+            2.1,
+            130,
+            4.0,
+            0.17,
+            0.4
+        ],
+        "fpa_effort_pm": 13.0,
+        "cocomo_effort_pm": 14.5,
+        "ucp_effort_pm": 12.0,
+        "actual_effort_pm": 13.5,
+        "tech_stack": "Node.js, React Native, MongoDB, Twilio",
+        "outcome": "on_time",
+        "code_structure": "# PetCare — Veterinary Platform Code Structure\n\n## Backend (Node.js/Express)\n`\nsrc/\n├── routes/\n│   ├── pets.js               # Profiles, medical history\n│   ├── vaccines.js           # Reminders, due dates\n│   ├── appointments.js       # Booking, calendar\n│   ├── prescriptions.js      # Refill requests\n│   └── clinics.js            # Manage clinics\n├── services/\n│   ├── reminderService.js    # Twilio SMS\n│   ├── vaccineScheduler.js   # Cron\n│   └── prescriptionFulfillment.js\n├── models/\n│   ├── Pet.js\n│   ├── VaccineRecord.js\n│   ├── Appointment.js\n│   ├── Prescription.js\n│   └── Clinic.js\n└── middleware/\n    └── auth.js\n`\n\n## Frontend (React Native)\n`\nsrc/\n├── screens/\n│   ├── HomeScreen.js             # Upcoming reminders\n│   ├── PetProfiles.js            # Add/edit pets\n│   ├── VaccineReminders.js\n│   ├── BookAppointment.js\n│   ├── PrescriptionRefill.js\n│   └── ClinicDashboard.js        # For staff\n├── components/\n│   ├── PetCard.js\n│   ├── ReminderNotification.js\n│   └── CalendarView.js\n└── services/\n    └── api.js\n`\n\n## Database (MongoDB)\n- pets, vaccine_records, appointments, prescriptions, clinics\n\n## Key APIs\n- POST /api/pets\n- GET /api/vaccines/reminders?petId=\n- POST /api/appointments/book\n- POST /api/prescriptions/refill"
+    },
+    {
+        "id": 35,
+        "project_name": "BizLoan",
+        "domain": "Fintech",
+        "requirements": "Loan application, credit scoring, document upload, approval workflow, repayment tracker.",
+        "modules": [
+            "Loan Application",
+            "Credit Scoring",
+            "Document Upload",
+            "Approval Workflow",
+            "Repayment Tracker"
+        ],
+        "complexity_vector": [
+            3.0,
+            210,
+            3.1,
+            0.28,
+            0.7
+        ],
+        "fpa_effort_pm": 26.0,
+        "cocomo_effort_pm": 28.0,
+        "ucp_effort_pm": 24.5,
+        "actual_effort_pm": 28.5,
+        "tech_stack": "Java/Spring Boot, React, PostgreSQL, Camunda BPM",
+        "outcome": "delayed",
+        "code_structure": "# BizLoan — Loan Origination Code Structure\n\n## Backend (Spring Boot + Camunda)\n`\nsrc/main/java/com/bizloan/\n├── controllers/\n│   ├── LoanApplicationController.java\n│   ├── CreditScoreController.java\n│   ├── DocumentController.java\n│   ├── ApprovalController.java\n│   └── RepaymentController.java\n├── services/\n│   ├── CreditBureauService.java    # External API\n│   ├── CamundaWorkflowService.java # BPMN\n│   ├── DocumentStorageService.java # S3\n│   └── RepaymentScheduleGenerator.java\n├── models/\n│   ├── LoanApplication.java\n│   ├── CreditScore.java\n│   ├── Document.java\n│   ├── ApprovalTask.java\n│   └── RepaymentSchedule.java\n└── workflows/\n    └── loan_approval.bpmn\n`\n\n## Frontend (React)\n`\nsrc/\n├── pages/\n│   ├── ApplyLoan.tsx          # Multi-step form\n│   ├── UploadDocuments.tsx\n│   ├── CreditScore.tsx        # Display score\n│   ├── ApprovalStatus.tsx     # Workflow progress\n│   └── RepaymentTracker.tsx   # Schedule, payments\n├── components/\n│   ├── LoanForm.tsx\n│   ├── DocumentUploader.tsx\n│   ├── WorkflowTimeline.tsx\n│   └── PaymentButton.tsx\n└── lib/\n    └── api.ts\n`\n\n## Database (PostgreSQL)\n- loan_applications, credit_scores, documents, approval_tasks, repayments\n\n## Key APIs\n- POST /api/loan/apply\n- GET /api/credit-score/{ssn}\n- POST /api/documents/upload\n- GET /api/loan/{id}/status"
+    },
+    {
+        "id": 36,
+        "project_name": "CloudIDE",
+        "domain": "Developer Tools",
+        "requirements": "Code editor, terminal, file explorer, Git integration, collaboration, build runner.",
+        "modules": [
+            "Code Editor",
+            "Terminal",
+            "File Explorer",
+            "Git Integration",
+            "Collaboration",
+            "Build Runner"
+        ],
+        "complexity_vector": [
+            3.3,
+            260,
+            2.8,
+            0.38,
+            0.9
+        ],
+        "fpa_effort_pm": 34.0,
+        "cocomo_effort_pm": 36.0,
+        "ucp_effort_pm": 32.0,
+        "actual_effort_pm": 38.0,
+        "tech_stack": "Go, React, Docker, WebSocket, Monaco Editor",
+        "outcome": "over_budget",
+        "code_structure": "# CloudIDE — Cloud Integrated Development Environment Code Structure\n\n## Backend (Go)\n`\nbackend/\n├── handlers/\n│   ├── editor.go             # File operations, save\n│   ├── terminal.go           # PTY sessions\n│   ├── files.go              # Explorer, tree\n│   ├── git.go                # Commit, push, pull\n│   ├── collaboration.go      # WebSocket sync\n│   └── build.go              # Docker runner\n├── services/\n│   ├── docker_service.go     # Spawn containers\n│   ├── websocket_broadcast.go\n│   ├── terminal_pty.go\n│   └── git_service.go\n├── models/\n│   ├── Workspace.go\n│   ├── FileNode.go\n│   ├── GitRepo.go\n│   └── BuildJob.go\n└── pkg/\n    └── auth/\n`\n\n## Frontend (React)\n`\nsrc/\n├── pages/\n│   ├── Workspace.tsx         # Split layout\n│   ├── Editor.tsx            # Monaco instance\n│   ├── Terminal.tsx          # xterm.js\n│   ├── FileExplorer.tsx\n│   ├── GitPanel.tsx\n│   ├── Collaboration.tsx     # Cursors\n│   └── BuildOutput.tsx\n├── components/\n│   ├── MonacoEditor.tsx\n│   ├── XTerminal.tsx\n│   ├── FileTree.tsx\n│   └── CollaboratorCursor.tsx\n└── lib/\n    ├── websocket.ts\n    └── dockerode.ts\n`\n\n## Database (PostgreSQL)\n- workspaces, files, git_repos, build_jobs, users\n\n## Key APIs\n- POST /api/workspace/create\n- WebSocket /ws/editor\n- POST /api/git/commit\n- POST /api/build/run"
+    },
+    {
+        "id": 37,
+        "project_name": "MediTrack",
+        "domain": "Healthcare",
+        "requirements": "Patient records, prescription management, lab results integration, insurance verification, telemedicine.",
+        "modules": [
+            "Patient Records",
+            "Prescription Management",
+            "Lab Results Integration",
+            "Insurance Verification",
+            "Telemedicine"
+        ],
+        "complexity_vector": [
+            3.0,
+            225,
+            3.0,
+            0.32,
+            0.7
+        ],
+        "fpa_effort_pm": 28.0,
+        "cocomo_effort_pm": 30.0,
+        "ucp_effort_pm": 26.5,
+        "actual_effort_pm": 31.0,
+        "tech_stack": "Python/Django, React, PostgreSQL, HL7/FHIR, Twilio Video",
+        "outcome": "delayed",
+        "code_structure": "# MediTrack — Healthcare Records Code Structure\n\n## Backend (Django)\n`\nbackend/\n├── apps/\n│   ├── patients/             # Demographics, history\n│   ├── prescriptions/        # eRx, renewals\n│   ├── lab_integration/      # HL7/FHIR\n│   ├── insurance/            # Verification API\n│   └── telemedicine/         # Twilio Video\n├── services/\n│   ├── fhir_service.py       # HL7/FHIR parser\n│   ├── insurance_verifier.py\n│   ├── twilio_video.py\n│   └── prescription_service.py\n├── models/\n│   ├── PatientRecord.py\n│   ├── Prescription.py\n│   ├── LabResult.py\n│   ├── InsuranceClaim.py\n│   └── TelemedicineSession.py\n└── api/\n    └── urls.py\n`\n\n## Frontend (React)\n`\nsrc/\n├── pages/\n│   ├── PatientRecords.tsx    # Search, view\n│   ├── Prescriptions.tsx     # Write, renew\n│   ├── LabResults.tsx        # Graphs\n│   ├── InsuranceVerification.tsx\n│   └── Telemedicine.tsx      # Video call\n├── components/\n│   ├── PatientChart.tsx\n│   ├── RXForm.tsx\n│   ├── LabTrendChart.tsx\n│   └── VideoCall.tsx\n└── lib/\n    └── twilio.js\n`\n\n## Database (PostgreSQL)\n- patient_records, prescriptions, lab_results, insurance_claims, telemedicine_sessions\n\n## Key APIs\n- GET /api/patients/{id}/record\n- POST /api/prescriptions/create\n- POST /api/lab/results/import\n- POST /api/telemedicine/start"
+    },
+    {
+        "id": 38,
+        "project_name": "EcoChain",
+        "domain": "Supply Chain",
+        "requirements": "Supplier management, carbon footprint tracking, logistics optimisation, compliance dashboard, blockchain provenance.",
+        "modules": [
+            "Supplier Management",
+            "Carbon Footprint Tracking",
+            "Logistics Optimisation",
+            "Compliance Dashboard",
+            "Blockchain Provenance"
+        ],
+        "complexity_vector": [
+            3.1,
+            245,
+            2.9,
+            0.33,
+            0.9
+        ],
+        "fpa_effort_pm": 31.0,
+        "cocomo_effort_pm": 33.0,
+        "ucp_effort_pm": 29.0,
+        "actual_effort_pm": 34.0,
+        "tech_stack": "Node.js, React, PostgreSQL, Hyperledger Fabric, Web3.js",
+        "outcome": "over_budget",
+        "code_structure": "# EcoChain — Supply Chain Sustainability Code Structure\n\n## Backend (Node.js)\n`\nsrc/\n├── routes/\n│   ├── suppliers.js          # Manage, score\n│   ├── carbon.js             # Track emissions\n│   ├── logistics.js          # Optimise routes\n│   ├── compliance.js         # Dashboard\n│   └── blockchain.js         # Hyperledger Fabric\n├── services/\n│   ├── fabric_client.js      # Invoke chaincode\n│   ├── carbon_calculator.js  # GHG Protocol\n│   ├── route_optimizer.js    # OR-Tools\n│   └── compliance_checker.js\n├── models/\n│   ├── Supplier.js\n│   ├── CarbonFootprint.js\n│   ├── Shipment.js\n│   ├── ComplianceReport.js\n│   └── BlockchainTx.js\n└── chaincode/\n    └── provenance.go\n`\n\n## Frontend (React)\n`\nsrc/\n├── pages/\n│   ├── Suppliers.tsx         # List, ratings\n│   ├── CarbonTracker.tsx     # Charts, offsets\n│   ├── Logistics.tsx         # Route map\n│   ├── Compliance.tsx        # KPIs\n│   └── BlockchainProvenance.tsx # Trace product\n├── components/\n│   ├── SupplierScorecard.tsx\n│   ├── EmissionChart.tsx\n│   ├── RouteMap.tsx\n│   └── ProvenanceTimeline.tsx\n└── lib/\n    └── web3.js\n`\n\n## Database (PostgreSQL)\n- suppliers, carbon_footprints, shipments, compliance_reports, blockchain_txs\n\n## Key APIs\n- POST /api/suppliers/register\n- GET /api/carbon/shipment/{id}\n- POST /api/logistics/optimise\n- GET /api/blockchain/trace/{productId}"
+    },
+    {
+        "id": 39,
+        "project_name": "SkillForge",
+        "domain": "EdTech",
+        "requirements": "Course marketplace, interactive exercises, skill assessment, certificate generation, instructor tools.",
+        "modules": [
+            "Course Marketplace",
+            "Interactive Exercises",
+            "Skill Assessment",
+            "Certificate Generation",
+            "Instructor Tools"
+        ],
+        "complexity_vector": [
+            2.6,
+            195,
+            3.4,
+            0.25,
+            0.6
+        ],
+        "fpa_effort_pm": 23.0,
+        "cocomo_effort_pm": 25.0,
+        "ucp_effort_pm": 21.5,
+        "actual_effort_pm": 24.0,
+        "tech_stack": "Ruby on Rails, React, PostgreSQL, Redis, Stripe Connect",
+        "outcome": "on_time",
+        "code_structure": "# SkillForge — EdTech Marketplace Code Structure\n\n## Backend (Ruby on Rails)\n`\napp/\n├── controllers/\n│   ├── courses_controller.rb       # Marketplace\n│   ├── exercises_controller.rb     # Interactive\n│   ├── assessments_controller.rb   # Skill tests\n│   ├── certificates_controller.rb  # Generation\n│   └── instructor_tools_controller.rb\n├── models/\n│   ├── course.rb\n│   ├── exercise.rb\n│   ├── assessment.rb\n│   ├── certificate.rb\n│   └── instructor.rb\n├── services/\n│   ├── stripe_connect_service.rb\n│   ├── pdf_certificate_generator.rb\n│   ├── assessment_scorer.rb\n│   └── exercise_checker.rb\n└── jobs/\n    └── issue_certificate_job.rb\n`\n\n## Frontend (React)\n`\nsrc/\n├── pages/\n│   ├── Marketplace.tsx       # Browse, filters\n│   ├── CourseDetail.tsx      # Curriculum\n│   ├── Exercise.tsx          # Coding playground\n│   ├── SkillAssessment.tsx   # MCQ, scoring\n│   ├── Certificate.tsx       # Download\n│   └── InstructorDashboard.tsx # Analytics\n├── components/\n│   ├── CourseCard.tsx\n│   ├── CodeEditor.tsx\n│   ├── AssessmentQuestion.tsx\n│   └── CertificatePreview.tsx\n└── lib/\n    └── api.ts\n`\n\n## Database (PostgreSQL)\n- courses, exercises, assessments, certificates, instructors, enrollments\n\n## Key APIs\n- GET /api/courses?skill=\n- POST /api/exercises/submit\n- POST /api/assessments/score\n- GET /api/certificates/{userId}/{courseId}"
+    },
+    {
+        "id": 40,
+        "project_name": "SecureVault",
+        "domain": "Cybersecurity",
+        "requirements": "Encrypted file storage, zeroâ€‘knowledge proof, share with expiry, audit logs, twoâ€‘factor auth.",
+        "modules": [
+            "Encrypted File Storage",
+            "Zeroâ€‘knowledge Proof",
+            "Share with Expiry",
+            "Audit Logs",
+            "Twoâ€‘factor Auth"
+        ],
+        "complexity_vector": [
+            3.0,
+            195,
+            3.5,
+            0.22,
+            0.9
+        ],
+        "fpa_effort_pm": 25.0,
+        "cocomo_effort_pm": 27.0,
+        "ucp_effort_pm": 23.5,
+        "actual_effort_pm": 27.0,
+        "tech_stack": "Go, React, PostgreSQL, AWS KMS, WebCrypto API",
+        "outcome": "on_time",
+        "code_structure": "# SecureVault — Encrypted File Vault Code Structure\n\n## Backend (Go)\n`\nbackend/\n├── handlers/\n│   ├── files.go              # Upload, download (encrypted)\n│   ├── crypto.go             # Zero-knowledge proof\n│   ├── share.go              # Expiring links\n│   ├── audit.go              # Logs\n│   └── auth.go               # 2FA (TOTP)\n├── services/\n│   ├── kms_service.go        # AWS KMS\n│   ├── zero_knowledge.go     # ZK proofs\n│   ├── audit_logger.go\n│   └── totp_service.go\n├── models/\n│   ├── EncryptedFile.go\n│   ├── ShareLink.go\n│   ├── AuditLog.go\n│   └── User.go\n└── middleware/\n    └── 2fa.go\n`\n\n## Frontend (React)\n`\nsrc/\n├── pages/\n│   ├── Vault.tsx             # File list, upload\n│   ├── Share.tsx             # Generate link, expiry\n│   ├── AuditLogs.tsx         # View access history\n│   ├── Security.tsx          # Enable 2FA\n│   └── Decrypt.tsx           # Zero-knowledge decrypt\n├── components/\n│   ├── FileUploader.tsx\n│   ├── ShareLinkGenerator.tsx\n│   ├── AuditTable.tsx\n│   └── TwoFactorSetup.tsx\n└── lib/\n    ├── webcrypto.js          # Client-side encryption\n    └── api.ts\n`\n\n## Database (PostgreSQL)\n- encrypted_files, share_links, audit_logs, users, totp_secrets\n\n## Key APIs\n- POST /api/files/upload (encrypted)\n- GET /api/files/download/{id}\n- POST /api/share/create\n- GET /api/audit/logs"
+    },
+    {
+        "id": 41,
+        "project_name": "HRInsight",
+        "domain": "HR Analytics",
+        "requirements": "Employee turnover prediction, performance dashboard, attrition drivers, compensation analysis, retention strategies.",
+        "modules": [
+            "Turnover Prediction",
+            "Performance Dashboard",
+            "Attrition Drivers",
+            "Compensation Analysis",
+            "Retention Strategies"
+        ],
+        "complexity_vector": [
+            2.8,
+            210,
+            3.2,
+            0.26,
+            0.7
+        ],
+        "fpa_effort_pm": 27.0,
+        "cocomo_effort_pm": 29.0,
+        "ucp_effort_pm": 25.5,
+        "actual_effort_pm": 29.0,
+        "tech_stack": "Python/Django, React, PostgreSQL, scikitâ€‘learn, Power BI",
+        "outcome": "delayed",
+        "code_structure": "# HRInsight — HR Analytics Platform Code Structure\n\n## Backend (Django)\n`\nbackend/\n├── apps/\n│   ├── turnover/             # Prediction model\n│   ├── performance/          # Dashboard metrics\n│   ├── attrition/            # Driver analysis\n│   ├── compensation/         # Salary benchmarks\n│   └── retention/            # Strategy recommendations\n├── services/\n│   ├── ml_predictor.py       # scikit-learn (RandomForest)\n│   ├── shap_explainer.py     # Feature importance\n│   ├── compensation_analyzer.py\n│   └── report_generator.py\n├── models/\n│   ├── Employee.py\n│   ├── TurnoverPrediction.py\n│   ├── PerformanceReview.py\n│   ├── Compensation.py\n│   └── RetentionAction.py\n└── api/\n    └── urls.py\n`\n\n## Frontend (React)\n`\nsrc/\n├── pages/\n│   ├── Dashboard.tsx         # KPIs, turnover risk\n│   ├── TurnoverPrediction.tsx # List at-risk\n│   ├── AttritionDrivers.tsx  # SHAP plots\n│   ├── Compensation.tsx      # Heatmaps\n│   └── RetentionStrategies.tsx # Recommendations\n├── components/\n│   ├── RiskGauge.tsx\n│   ├── FeatureImportanceChart.tsx\n│   ├── SalaryBands.tsx\n│   └── StrategyCard.tsx\n└── lib/\n    └── api.ts\n`\n\n## Database (PostgreSQL)\n- employees, performance_reviews, turnover_predictions, compensation_data\n\n## Key APIs\n- GET /api/turnover/predict\n- GET /api/performance/dashboard\n- GET /api/attrition/drivers\n- POST /api/compensation/analyze"
+    },
+    {
+        "id": 42,
+        "project_name": "AgriSmart",
+        "domain": "Agriculture Tech",
+        "requirements": "Crop monitoring, soil sensors, weather forecast integration, yield prediction, pesticide recommendation.",
+        "modules": [
+            "Crop Monitoring",
+            "Soil Sensors",
+            "Weather Forecast Integration",
+            "Yield Prediction",
+            "Pesticide Recommendation"
+        ],
+        "complexity_vector": [
+            2.7,
+            185,
+            3.1,
+            0.28,
+            0.7
+        ],
+        "fpa_effort_pm": 22.0,
+        "cocomo_effort_pm": 24.0,
+        "ucp_effort_pm": 20.5,
+        "actual_effort_pm": 24.0,
+        "tech_stack": "Node.js, React, InfluxDB, MQTT, OpenWeather API",
+        "outcome": "on_time",
+        "code_structure": "# AgriSmart — Agriculture IoT Code Structure\n\n## Backend (Node.js/Express)\n`\nsrc/\n├── routes/\n│   ├── crops.js              # Monitoring, NDVI\n│   ├── sensors.js            # Soil moisture, temp\n│   ├── weather.js            # Forecast API\n│   ├── yield.js              # Prediction model\n│   └── pesticides.js         # Recommendation\n├── services/\n│   ├── mqtt_client.js        # Ingest sensor data\n│   ├── openweather_service.js\n│   ├── yield_model.js        # Linear regression\n│   ├── pesticide_advisor.js  # Rule-based\n│   └── influx_service.js\n├── models/\n│   ├── Crop.js\n│   ├── SensorReading.js\n│   ├── WeatherData.js\n│   ├── YieldPrediction.js\n│   └── PesticideAdvice.js\n└── middleware/\n    └── auth.js\n`\n\n## Frontend (React)\n`\nsrc/\n├── pages/\n│   ├── Dashboard.tsx         # Map, crop health\n│   ├── CropMonitor.tsx       # Growth stages\n│   ├── SensorData.tsx        # Charts (moisture)\n│   ├── WeatherForecast.tsx\n│   ├── YieldPredict.tsx\n│   └── PesticideReco.tsx\n├── components/\n│   ├── FieldMap.tsx          # Leaflet\n│   ├── SensorGauge.tsx\n│   ├── ForecastCard.tsx\n│   └── RecommendationCard.tsx\n└── lib/\n    └── api.ts\n`\n\n## Database (InfluxDB + PostgreSQL)\n- sensor_readings (time-series), crops, yield_predictions, pesticide_advice\n\n## Key APIs\n- GET /api/crops/{id}/health\n- GET /api/sensors/latest\n- GET /api/weather/forecast?lat=&lng=\n- POST /api/yield/predict"
+    },
+    {
+        "id": 43,
+        "project_name": "RentalHub",
+        "domain": "Real Estate",
+        "requirements": "Property listings, tenant screening, lease management, maintenance requests, rent collection.",
+        "modules": [
+            "Property Listings",
+            "Tenant Screening",
+            "Lease Management",
+            "Maintenance Requests",
+            "Rent Collection"
+        ],
+        "complexity_vector": [
+            2.4,
+            170,
+            3.5,
+            0.22,
+            0.5
+        ],
+        "fpa_effort_pm": 19.0,
+        "cocomo_effort_pm": 21.0,
+        "ucp_effort_pm": 18.0,
+        "actual_effort_pm": 20.0,
+        "tech_stack": "Django, React, PostgreSQL, Stripe, Twilio",
+        "outcome": "on_time",
+        "code_structure": "# RentalHub — Property Rental Platform Code Structure\n\n## Backend (Django)\n`\nbackend/\n├── apps/\n│   ├── properties/           # Listings, search\n│   ├── screening/            # Credit check, references\n│   ├── leases/               # Contracts, e-sign\n│   ├── maintenance/          # Requests, work orders\n│   └── rent/                 # Collection, reminders\n├── services/\n│   ├── stripe_service.py     # Rent payment\n│   ├── twilio_service.py     # SMS reminders\n│   ├── tenant_screening.py   # Background check API\n│   └── lease_pdf.py\n└── api/\n    └── urls.py\n`\n\n## Frontend (React)\n`\nsrc/\n├── pages/\n│   ├── Properties.tsx        # Search, filters\n│   ├── PropertyDetail.tsx    # Apply, view\n│   ├── TenantScreening.tsx   # Submit info\n│   ├── LeaseAgreement.tsx    # Sign\n│   ├── Maintenance.tsx       # Create request\n│   └── RentPayment.tsx\n├── components/\n│   ├── PropertyCard.tsx\n│   ├── ScreeningForm.tsx\n│   ├── LeaseSigner.tsx\n│   └── PaymentButton.tsx\n└── lib/\n    └── stripe.ts\n`\n\n## Database (PostgreSQL)\n- properties, applicants, leases, maintenance_requests, rent_payments\n\n## Key APIs\n- GET /api/properties?city=\n- POST /api/screening/submit\n- POST /api/leases/sign\n- POST /api/rent/collect"
+    },
+    {
+        "id": 44,
+        "project_name": "MediChain",
+        "domain": "Healthcare Blockchain",
+        "requirements": "Patient consent management, data sharing, audit trail, interoperability, token incentives.",
+        "modules": [
+            "Patient Consent Management",
+            "Data Sharing",
+            "Audit Trail",
+            "Interoperability",
+            "Token Incentives"
+        ],
+        "complexity_vector": [
+            3.2,
+            240,
+            2.8,
+            0.35,
+            0.9
+        ],
+        "fpa_effort_pm": 33.0,
+        "cocomo_effort_pm": 35.0,
+        "ucp_effort_pm": 31.0,
+        "actual_effort_pm": 37.0,
+        "tech_stack": "Hyperledger Fabric, Node.js, React, PostgreSQL, Web3.js",
+        "outcome": "over_budget",
+        "code_structure": "# MediChain — Healthcare Blockchain Code Structure\n\n## Backend (Node.js + Hyperledger)\n`\nsrc/\n├── routes/\n│   ├── consent.js            # Grant/revoke\n│   ├── sharing.js            # Data access\n│   ├── audit.js              # Blockchain logs\n│   ├── interoperability.js   # FHIR mapping\n│   └── tokens.js             # Incentives\n├── services/\n│   ├── fabric_client.js      # Chaincode invoke\n│   ├── consent_contract.js\n│   ├── fhir_converter.js\n│   └── token_service.js\n├── models/\n│   ├── ConsentRecord.js\n│   ├── DataAccessLog.js\n│   ├── AuditEntry.js\n│   └── TokenTransaction.js\n└── chaincode/\n    └── consent_chaincode.go\n`\n\n## Frontend (React)\n`\nsrc/\n├── pages/\n│   ├── ConsentManager.tsx    # List active consents\n│   ├── DataSharing.tsx       # Request access\n│   ├── AuditTrail.tsx        # Blockchain explorer\n│   ├── Interoperability.tsx  # FHIR export\n│   └── TokenDashboard.tsx    # Earn/spend tokens\n├── components/\n│   ├── ConsentToggle.tsx\n│   ├── AuditLogTable.tsx\n│   ├── TokenBalance.tsx\n│   └── FHIRViewer.tsx\n└── lib/\n    └── web3.js\n`\n\n## Database (PostgreSQL + Blockchain)\n- PostgreSQL: consent meta, token balances\n- Hyperledger: immutable consent logs, audit trail\n\n## Key APIs\n- POST /api/consent/grant\n- GET /api/audit/patient/{id}\n- POST /api/sharing/request\n- GET /api/tokens/balance"
+    },
+    {
+        "id": 45,
+        "project_name": "EduBot",
+        "domain": "EdTech",
+        "requirements": "AI tutor, personalised learning path, homework grading, doubt resolution, progress tracking.",
+        "modules": [
+            "AI Tutor",
+            "Personalised Learning Path",
+            "Homework Grading",
+            "Doubt Resolution",
+            "Progress Tracking"
+        ],
+        "complexity_vector": [
+            3.0,
+            200,
+            3.4,
+            0.3,
+            0.8
+        ],
+        "fpa_effort_pm": 28.0,
+        "cocomo_effort_pm": 30.0,
+        "ucp_effort_pm": 26.5,
+        "actual_effort_pm": 31.0,
+        "tech_stack": "Python/FastAPI, React, PostgreSQL, GPTâ€‘4 API, Celery",
+        "outcome": "delayed",
+        "code_structure": "# EduBot — AI-Powered Tutor Code Structure\n\n## Backend (FastAPI)\n`\nbackend/\n├── routers/\n│   ├── tutor.py              # GPT-4 chat\n│   ├── learning_path.py      # Personalised\n│   ├── grading.py            # Homework auto-grade\n│   ├── doubts.py             # Q&A\n│   └── progress.py           # Tracking\n├── services/\n│   ├── gpt_client.py         # OpenAI API\n│   ├── path_optimizer.py     # Reinforcement learning\n│   ├── grader.py             # NLP grading\n│   ├── doubt_resolver.py     # Semantic search\n│   └── progress_tracker.py\n├── models/\n│   ├── Conversation.py\n│   ├── LearningPath.py\n│   ├── HomeworkSubmission.py\n│   ├── DoubtTicket.py\n│   └── ProgressSnapshot.py\n└── tasks/\n    └── celery_worker.py\n`\n\n## Frontend (React)\n`\nsrc/\n├── pages/\n│   ├── Chat.tsx              # AI tutor interface\n│   ├── LearningPath.tsx      # Personalized modules\n│   ├── Homework.tsx          # Upload, grade\n│   ├── Doubts.tsx            # Ask, browse\n│   └── Progress.tsx          # Charts, milestones\n├── components/\n│   ├── ChatMessage.tsx\n│   ├── PathCard.tsx\n│   ├── GradeDisplay.tsx\n│   └── ProgressBar.tsx\n└── lib/\n    └── api.ts\n`\n\n## Database (PostgreSQL)\n- conversations, learning_paths, homework_submissions, doubts, progress_snapshots\n\n## Key APIs\n- POST /api/tutor/chat\n- GET /api/learning-path/{userId}\n- POST /api/homework/grade\n- GET /api/progress/{userId}"
+    },
+    {
+        "id": 46,
+        "project_name": "LogiFlow",
+        "domain": "Supply Chain",
+        "requirements": "Warehouse management, order picking, inventory optimisation, demand forecasting, return processing.",
+        "modules": [
+            "Warehouse Management",
+            "Order Picking",
+            "Inventory Optimisation",
+            "Demand Forecasting",
+            "Return Processing"
+        ],
+        "complexity_vector": [
+            2.9,
+            230,
+            3.2,
+            0.27,
+            0.6
+        ],
+        "fpa_effort_pm": 28.0,
+        "cocomo_effort_pm": 30.0,
+        "ucp_effort_pm": 26.0,
+        "actual_effort_pm": 30.5,
+        "tech_stack": "Java/Spring, React, PostgreSQL, Redis, Prophet (fbprophet)",
+        "outcome": "delayed",
+        "code_structure": "# LogiFlow — Warehouse & Inventory Code Structure\n\n## Backend (Spring Boot)\n`\nsrc/main/java/com/logiflow/\n├── controllers/\n│   ├── WarehouseController.java     # Zones, stock\n│   ├── PickingController.java       # Pick lists\n│   ├── InventoryController.java     # Optimisation\n│   ├── ForecastController.java      # Demand\n│   └── ReturnController.java        # Process returns\n├── services/\n│   ├── ProphetForecastService.java  # Python bridge\n│   ├── PickingOptimizer.java        # Route sorting\n│   ├── SafetyStockCalculator.java\n│   └── ReturnRestockingService.java\n├── models/\n│   ├── Warehouse.java\n│   ├── PickOrder.java\n│   ├── InventoryItem.java\n│   ├── DemandForecast.java\n│   └── ReturnRequest.java\n└── config/\n    └── RedisCacheConfig.java\n`\n\n## Frontend (React)\n`\nsrc/\n├── pages/\n│   ├── WarehouseMap.tsx      # 2D layout\n│   ├── Picking.tsx           # Pick list, scan\n│   ├── Inventory.tsx         # Stock levels\n│   ├── Forecasting.tsx       # Demand chart\n│   └── Returns.tsx           # Process queue\n├── components/\n│   ├── ZoneHeatmap.tsx\n│   ├── PicklistTable.tsx\n│   ├── ForecastPlot.tsx\n│   └── ReturnCard.tsx\n└── lib/\n    └── api.ts\n`\n\n## Database (PostgreSQL + Redis)\n- warehouses, pick_orders, inventory, forecasts, returns\n- Redis: real-time inventory cache\n\n## Key APIs\n- GET /api/warehouse/zones\n- POST /api/picking/generate\n- GET /api/forecast/demand?sku=\n- POST /api/returns/process"
+    },
+    {
+        "id": 47,
+        "project_name": "VoteChain",
+        "domain": "Eâ€‘Voting",
+        "requirements": "Voter registration, encrypted ballot, verification, realâ€‘time results, auditability.",
+        "modules": [
+            "Voter Registration",
+            "Encrypted Ballot",
+            "Verification",
+            "Realâ€‘time Results",
+            "Auditability"
+        ],
+        "complexity_vector": [
+            3.0,
+            190,
+            3.5,
+            0.2,
+            0.8
+        ],
+        "fpa_effort_pm": 25.0,
+        "cocomo_effort_pm": 27.0,
+        "ucp_effort_pm": 23.5,
+        "actual_effort_pm": 27.0,
+        "tech_stack": "Ethereum (Solidity), React, Node.js, TheGraph, IPFS",
+        "outcome": "on_time",
+        "code_structure": "# VoteChain — Blockchain E-Voting Code Structure\n\n## Backend (Node.js + Ethereum)\n`\nsrc/\n├── routes/\n│   ├── register.js           # Voter registration (off-chain)\n│   ├── vote.js               # Cast encrypted vote\n│   ├── verify.js             # ZK verification\n│   ├── results.js            # Real-time tally\n│   └── audit.js              # Blockchain explorer\n├── services/\n│   ├── web3_service.js       # Contract interaction\n│   ├── encryption.js         # Homomorphic encryption\n│   ├── thegraph_client.js    # Subgraph queries\n│   ├── ipfs_service.js       # Store encrypted ballots\n│   └── verification_service.js\n├── contracts/\n│   ├── VoteToken.sol\n│   ├── BallotBox.sol\n│   └── Verification.sol\n└── models/\n    ├── Voter.js\n    ├── Ballot.js\n    └── ElectionResult.js\n`\n\n## Frontend (React)\n`\nsrc/\n├── pages/\n│   ├── Register.tsx          # Identity verification\n│   ├── Vote.tsx              # Candidate selection\n│   ├── Verify.tsx            # Check vote receipt\n│   ├── Results.tsx           # Live tally\n│   └── Audit.tsx             # Blockchain explorer\n├── components/\n│   ├── BallotEncryption.tsx\n│   ├── ReceiptVerifier.tsx\n│   ├── ResultsChart.tsx\n│   └── BlockExplorer.tsx\n└── lib/\n    ├── web3.js\n    └── ipfs.js\n`\n\n## Blockchain (Ethereum)\n- VoteToken, BallotBox, Verification contracts\n- IPFS: encrypted ballots\n\n## Key APIs\n- POST /api/register/voter\n- POST /api/vote/cast\n- GET /api/results/live\n- GET /api/audit/ballot/{id}"
+    },
+    {
+        "id": 48,
+        "project_name": "InsureFlow",
+        "domain": "Insurance",
+        "requirements": "Policy management, claims processing, risk assessment, premium calculator, customer portal.",
+        "modules": [
+            "Policy Management",
+            "Claims Processing",
+            "Risk Assessment",
+            "Premium Calculator",
+            "Customer Portal"
+        ],
+        "complexity_vector": [
+            2.7,
+            200,
+            3.3,
+            0.25,
+            0.6
+        ],
+        "fpa_effort_pm": 24.0,
+        "cocomo_effort_pm": 26.0,
+        "ucp_effort_pm": 22.5,
+        "actual_effort_pm": 26.0,
+        "tech_stack": ".NET Core, React, SQL Server, Docker, ML.NET",
+        "outcome": "on_time",
+        "code_structure": "# InsureFlow — Insurance Platform Code Structure\n\n## Backend (.NET Core)\n`\nInsureFlow/\n├── Controllers/\n│   ├── PoliciesController.cs        # CRUD, renew\n│   ├── ClaimsController.cs          # File, track\n│   ├── RiskController.cs            # ML.NET assessment\n│   ├── PremiumController.cs         # Calculator\n│   └── CustomerPortalController.cs\n├── Services/\n│   ├── RiskModelService.cs          # ML.NET model\n│   ├── PremiumCalculator.cs\n│   ├── ClaimWorkflow.cs\n│   └── PolicyDocumentGenerator.cs\n├── Models/\n│   ├── Policy.cs\n│   ├── Claim.cs\n│   ├── RiskScore.cs\n│   ├── PremiumQuote.cs\n│   └── Customer.cs\n└── Data/\n    └── AppDbContext.cs\n`\n\n## Frontend (React)\n`\nsrc/\n├── pages/\n│   ├── Policies.tsx          # My policies\n│   ├── Claims.tsx            # File, status\n│   ├── RiskAssessment.tsx    # Questionnaire\n│   ├── PremiumCalculator.tsx # Get quote\n│   └── CustomerPortal.tsx    # Dashboard\n├── components/\n│   ├── PolicyCard.tsx\n│   ├── ClaimForm.tsx\n│   ├── RiskMeter.tsx\n│   └── QuoteForm.tsx\n└── lib/\n    └── api.ts\n`\n\n## Database (SQL Server)\n- policies, claims, risk_scores, premium_quotes, customers\n\n## Key APIs\n- GET /api/policies/{id}\n- POST /api/claims/submit\n- POST /api/risk/assess\n- POST /api/premium/calculate"
+    },
+    {
+        "id": 49,
+        "project_name": "GreenEnergy",
+        "domain": "Energy",
+        "requirements": "Solar production monitoring, consumption tracking, grid sellâ€‘back, predictive maintenance, carbon credits.",
+        "modules": [
+            "Solar Production Monitoring",
+            "Consumption Tracking",
+            "Grid Sellâ€‘back",
+            "Predictive Maintenance",
+            "Carbon Credits"
+        ],
+        "complexity_vector": [
+            2.8,
+            195,
+            3.3,
+            0.26,
+            0.7
+        ],
+        "fpa_effort_pm": 24.5,
+        "cocomo_effort_pm": 26.5,
+        "ucp_effort_pm": 23.0,
+        "actual_effort_pm": 26.0,
+        "tech_stack": "Python/FastAPI, React, InfluxDB, MQTT, Azure IoT",
+        "outcome": "on_time",
+        "code_structure": "# GreenEnergy — Energy Management Code Structure\n\n## Backend (FastAPI)\n`\nbackend/\n├── routers/\n│   ├── solar.py              # Production data\n│   ├── consumption.py        # Usage tracking\n│   ├── grid.py               # Sell-back credits\n│   ├── maintenance.py        # Predictive model\n│   └── carbon.py             # Credits calculation\n├── services/\n│   ├── mqtt_listener.py      # Inverter data\n│   ├── predictive_model.py   # Failure prediction\n│   ├── grid_export.py        # Net metering API\n│   └── carbon_offset.py\n├── models/\n│   ├── SolarReading.py\n│   ├── ConsumptionReading.py\n│   ├── GridTransaction.py\n│   ├── MaintenanceAlert.py\n│   └── CarbonCredit.py\n└── utils/\n    └── influx_client.py\n`\n\n## Frontend (React)\n`\nsrc/\n├── pages/\n│   ├── Dashboard.tsx         # Production vs consumption\n│   ├── SolarMonitor.tsx      # Real-time kW\n│   ├── Consumption.tsx       # Hourly breakdown\n│   ├── GridSellback.tsx      # Earnings\n│   ├── Maintenance.tsx       # Alerts\n│   └── CarbonCredits.tsx     # Balance\n├── components/\n│   ├── EnergyChart.tsx\n│   ├── SolarGauge.tsx\n│   ├── AlertCard.tsx\n│   └── CreditCounter.tsx\n└── lib/\n    └── api.ts\n`\n\n## Database (InfluxDB + PostgreSQL)\n- solar_readings, consumption_readings (time-series)\n- grid_transactions, maintenance_alerts, carbon_credits\n\n## Key APIs\n- GET /api/solar/now\n- GET /api/consumption/daily\n- POST /api/grid/sell\n- GET /api/maintenance/predict"
+    },
+    {
+        "id": 50,
+        "project_name": "SpaceHub",
+        "domain": "Collaboration",
+        "requirements": "Virtual office, persistent rooms, screen sharing, whiteboard, meeting recording, transcription.",
+        "modules": [
+            "Virtual Office",
+            "Persistent Rooms",
+            "Screen Sharing",
+            "Whiteboard",
+            "Meeting Recording",
+            "Transcription"
+        ],
+        "complexity_vector": [
+            2.9,
+            240,
+            3.1,
+            0.3,
+            0.8
+        ],
+        "fpa_effort_pm": 31.0,
+        "cocomo_effort_pm": 33.0,
+        "ucp_effort_pm": 29.5,
+        "actual_effort_pm": 34.0,
+        "tech_stack": "Node.js, React, WebRTC, MongoDB, AWS Transcribe",
+        "outcome": "over_budget",
+        "code_structure": "# SpaceHub — Virtual Collaboration Code Structure\n\n## Backend (Node.js/Express)\n`\nsrc/\n├── routes/\n│   ├── rooms.js              # Persistent rooms\n│   ├── webrtc.js             # Signaling\n│   ├── screenshare.js        # Screen capture\n│   ├── whiteboard.js         # Real-time canvas\n│   ├── recording.js          # AWS Transcribe\n│   └── transcription.js      # Store transcripts\n├── services/\n│   ├── webrtc_signaling.js   # Socket.io\n│   ├── aws_transcribe.js     # Recording to text\n│   ├── whiteboard_sync.js\n│   └── recording_storage.js  # S3\n├── models/\n│   ├── Room.js\n│   ├── WhiteboardState.js\n│   ├── Recording.js\n│   └── Transcript.js\n└── sockets/\n    └── webrtc.js\n`\n\n## Frontend (React)\n`\nsrc/\n├── pages/\n│   ├── VirtualOffice.tsx     # Room list\n│   ├── Room.tsx              # Video grid, controls\n│   ├── ScreenShare.tsx\n│   ├── Whiteboard.tsx        # Drawing canvas\n│   ├── Recordings.tsx        # List, playback\n│   └── Transcripts.tsx       # Searchable text\n├── components/\n│   ├── VideoTile.tsx\n│   ├── WhiteboardCanvas.tsx\n│   ├── RecordingButton.tsx\n│   └── TranscriptViewer.tsx\n└── lib/\n    ├── webrtc.js\n    └── socket.js\n`\n\n## Database (MongoDB)\n- rooms, whiteboard_states, recordings, transcripts, users\n\n## Key APIs\n- POST /api/rooms/create\n- WebSocket /signal\n- POST /api/recording/start\n- GET /api/transcripts/{roomId}"
+    },
+    {
+        "id": 51,
+        "project_name": "QuickShop – E‑commerce Platform",
+        "domain": "E-commerce",
+        "requirements": "Build a modern e‑commerce web application with the following features:\n\n- User authentication (email/password signup and login, password reset)\n- Product catalog with search, filtering by category and price range\n- Shopping cart that persists across sessions (real‑time quantity updates)\n- Secure payment integration (credit card + PayPal)\n- Admin panel to manage products (add/edit/remove), view orders, and generate sales reports\n- Email notifications for order confirmation and password reset\n- Mobile‑responsive design (works on phones, tablets, desktops)\n- Real‑time inventory sync (when a product is ordered, stock updates immediately)\n- User profile page where customers can view order history and saved addresses\n\nNon‑functional requirements:\n- Must handle 10,000 concurrent users during peak sales\n- 99.9% uptime (redundant servers)\n- PCI‑DSS compliance for payment data",
+        "modules": [
+            "User Management",
+            "Product Catalog",
+            "Shopping Cart",
+            "Payment Gateway",
+            "Admin Panel",
+            "Email Notifications",
+            "Inventory Management",
+            "User Profile"
+        ],
+        "complexity_vector": [
+            3.5,
+            100000,
+            4,
+            0.25,
+            0.5
+        ],
+        "fpa_effort_pm": 8.4,
+        "cocomo_effort_pm": 484.99,
+        "ucp_effort_pm": 0.38475000000000004,
+        "actual_effort_pm": 194.1,
+        "tech_stack": "FastAPI, React, PostgreSQL, Redis, Stripe, Supabase",
+        "outcome": "delayed",
+        "code_structure": "# Project Code Structure\n## Overview\nThe e-commerce web application will be built using a microservices architecture, with separate components for backend, frontend, database, caching, and integrations.\n\n## Folder Structure\n```markdown\necommerce-app/\n├── backend/\n│   ├── main.py\n│   ├── routes/\n│   │   ├── auth.py\n│   │   ├── products.py\n│   │   ├── orders.py\n│   │   └── payments.py\n│   ├── models/\n│   │   ├── user.py\n│   │   ├── product.py\n│   │   └── order.py\n│   ├── services/\n│   │   ├── auth.py\n│   │   ├── product.py\n│   │   └── payment.py\n│   └── utils/\n│       ├── redis.py\n│       └── supabase.py\n├── frontend/\n│   ├── public/\n│   │   └── index.html\n│   ├── src/\n│   │   ├── components/\n│   │   │   ├── Header.js\n│   │   │   ├── Footer.js\n│   │   │   └── ProductCard.js\n│   │   ├── containers/\n│   │   │   ├── App.js\n│   │   │   └── ProductList.js\n│   │   ├── hooks/\n│   │   │   └── useCart.js\n│   │   ├── pages/\n│   │   │   ├── Home.js\n│   │   │   ├── Product.js\n│   │   │   └── Cart.js\n│   │   └── utils/\n│   │       └── api.js\n│   └── package.json\n├── database/\n│   └── schema.sql\n├── integrations/\n│   ├── payment/\n│   │   ├── stripe.py\n│   │   └── paypal.py\n│   └── email/\n│       └── sendgrid.py\n└── docker-compose.yml\n```\n\n## Backend (FastAPI)\n### Responsibilities\n* User authentication and authorization\n* Product catalog management\n* Order management\n* Payment processing\n* Real-time inventory sync\n\n### API Endpoints\n#### Authentication\n* `POST /auth/signup`: Create a new user account\n* `POST /auth/login`: Login to an existing user account\n* `POST /auth/password-reset`: Reset a user's password\n\n#### Products\n* `GET /products`: Retrieve a list of products\n* `GET /products/{product_id}`: Retrieve a single product\n* `POST /products`: Create a new product\n* `PUT /products/{product_id}`: Update an existing product\n* `DELETE /products/{product_id}`: Delete a product\n\n#### Orders\n* `GET /orders`: Retrieve a list of orders for the current user\n* `POST /orders`: Create a new order\n* `GET /orders/{order_id}`: Retrieve a single order\n\n#### Payments\n* `POST /payments`: Process a payment for an order\n\n## Frontend (React)\n### Responsibilities\n* User interface for product catalog, shopping cart, and order management\n* Real-time quantity updates for shopping cart\n\n### Components\n* `Header.js`: Navigation header with cart and login/logout links\n* `Footer.js`: Site footer with copyright information\n* `ProductCard.js`: Product card component for product list\n* `ProductList.js`: Product list component with filtering and search\n* `Cart.js`: Shopping cart component with real-time quantity updates\n\n## Database (Supabase)\n### Responsibilities\n* Store user data, product data, and order data\n\n### Schema\n```sql\nCREATE TABLE users (\n    id SERIAL PRIMARY KEY,\n    email VARCHAR(255) UNIQUE NOT NULL,\n    password VARCHAR(255) NOT NULL\n);\n\nCREATE TABLE products (\n    id SERIAL PRIMARY KEY,\n    name VARCHAR(255) NOT NULL,\n    description TEXT NOT NULL,\n    price DECIMAL(10, 2) NOT NULL,\n    stock INTEGER NOT NULL\n);\n\nCREATE TABLE orders (\n    id SERIAL PRIMARY KEY,\n    user_id INTEGER NOT NULL REFERENCES users(id),\n    product_id INTEGER NOT NULL REFERENCES products(id),\n    quantity INTEGER NOT NULL,\n    total DECIMAL(10, 2) NOT NULL\n);\n```\n\n## Caching (Redis)\n### Responsibilities\n* Cache product data and order data for faster retrieval\n\n### Configuration\n```python\nimport redis\n\nredis_client = redis.Redis(host='localhost', port=6379, db=0)\n\ndef get_product(product_id):\n    product = redis_client.get(f'product:{product_id}')\n    if product is None:\n        product = retrieve_product_from_database(product_id)\n        redis_client.set(f'product:{product_id}', product)\n    return product\n```\n\n## Integrations\n### Payment Gateways\n* Stripe: `stripe.py`\n* PayPal: `paypal.py`\n\n### Email Service\n* SendGrid: `sendgrid.py`\n\n## Docker Compose\n```yml\nversion: '3'\nservices:\n  backend:\n    build: ./backend\n    ports:\n      - \"8000:8000\"\n    depends_on:\n      - redis\n      - supabase\n    environment:\n      - REDIS_HOST=redis\n      - SUPABASE_URL=supabase\n\n  frontend:\n    build: ./frontend\n    ports:\n      - \"3000:3000\"\n\n  redis:\n    image: redis:latest\n    ports:\n      - \"6379:6379\"\n\n  supabase:\n    image: supabase/supabase:latest\n    ports:\n      - \"5432:5432\"\n    environment:\n      - POSTGRES_USER=postgres\n      - POSTGRES_PASSWORD=postgres\n      - POSTGRES_DB=postgres\n```",
+        "archived_at": "2026-04-25T06:06:12.443969"
+    }
+]
