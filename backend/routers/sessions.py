@@ -161,16 +161,20 @@ async def update_session(session_id: str, payload: SessionUpdate, user: AuthUser
 async def archive_session(session_id: str, request: Request, user: AuthUser = Depends(get_current_user)):
     """
     Save completed session data to data.json for self-learning.
-    Called automatically before session deletion, or manually.
-    Also retrains the in-memory ML model with the new project.
+    Only saves if estimation has been run (estimation_id exists).
+    Called when user clicks Dashboard button or Save to ML button.
     """
-    from fastapi import Request as FastAPIRequest
     profile = await ensure_profile(user)
     sess_rows = await rest_select("sessions", user, filters={"id": f"eq.{session_id}", "user_id": f"eq.{profile['id']}"}, limit=1)
     if not sess_rows:
         raise HTTPException(status_code=404, detail="Session not found")
     sess = sess_rows[0]
     state = sess.get("session_state") or {}
+
+    # ── GUARD: only archive if estimation has been run ────────────────────────
+    if not sess.get("estimation_id"):
+        console.log(f"[bold yellow][ARCHIVE][/] Skipping — no estimation run yet for session {session_id[:8]}")
+        return {"archived": False, "reason": "No estimation run yet — run all methods first"}
 
     proj_rows = await rest_select("projects", user, filters={"id": f"eq.{sess['project_id']}"}, limit=1)
     req_rows = await rest_select("requirements", user, filters={"project_id": f"eq.{sess['project_id']}"}, order="created_at.desc", limit=1)
@@ -184,10 +188,16 @@ async def archive_session(session_id: str, request: Request, user: AuthUser = De
     modules: list[str] = structured.get("modules") or []
 
     # Get estimation data
-    est = None
-    if sess.get("estimation_id"):
-        est_rows = await rest_select("estimations", user, filters={"id": f"eq.{sess['estimation_id']}"}, limit=1)
-        est = est_rows[0] if est_rows else None
+    est_rows = await rest_select("estimations", user, filters={"id": f"eq.{sess['estimation_id']}"}, limit=1)
+    est = est_rows[0] if est_rows else None
+
+    if not est:
+        return {"archived": False, "reason": "Estimation data not found"}
+
+    # ── GUARD: require self_learning result (means run-all was completed) ─────
+    if not est.get("self_learning_effort_pm"):
+        console.log(f"[bold yellow][ARCHIVE][/] Skipping — run-all not completed for session {session_id[:8]}")
+        return {"archived": False, "reason": "Run all estimation methods first"}
 
     # Get tech stack from similarity meta
     sim_meta = state.get("similarity_meta") or {}
@@ -200,13 +210,12 @@ async def archive_session(session_id: str, request: Request, user: AuthUser = De
     loc_est = int(structured.get("loc_estimated") or 10000)
     complexity_vector = [complexity_score, loc_est, 4, 0.25, 0.5]
 
-    # Determine outcome from self-learning reasoning
+    # Determine outcome from warning
     outcome = "on_time"
-    if est:
-        mc = est.get("method_comparison") or {}
-        warning = mc.get("warning") or ""
-        if "delayed" in warning.lower() or "buffer" in warning.lower():
-            outcome = "delayed"
+    mc = est.get("method_comparison") or {}
+    warning = mc.get("warning") or ""
+    if "delayed" in warning.lower() or "buffer" in warning.lower():
+        outcome = "delayed"
 
     record = archive_session_to_data_json(
         project_name=proj.get("project_name", "Unknown"),
@@ -214,11 +223,11 @@ async def archive_session(session_id: str, request: Request, user: AuthUser = De
         requirements_text=req_row.get("requirements_text", ""),
         modules=modules,
         tech_stack=tech_stack,
-        fpa_effort_pm=est.get("adjusted_fp") / 20.0 if est and est.get("adjusted_fp") else None,
-        cocomo_effort_pm=est.get("cocomo_effort_pm") if est else None,
-        ucp_effort_pm=est.get("ucp_points") / 160.0 if est and est.get("ucp_points") else None,
-        self_learning_effort_pm=est.get("self_learning_effort_pm") if est else None,
-        actual_effort_pm=est.get("self_learning_effort_pm") if est else None,
+        fpa_effort_pm=est.get("adjusted_fp") / 20.0 if est.get("adjusted_fp") else None,
+        cocomo_effort_pm=est.get("cocomo_effort_pm"),
+        ucp_effort_pm=est.get("ucp_points") / 160.0 if est.get("ucp_points") else None,
+        self_learning_effort_pm=est.get("self_learning_effort_pm"),
+        actual_effort_pm=est.get("self_learning_effort_pm"),
         code_structure=state.get("code_structure"),
         outcome=outcome,
         complexity_vector=complexity_vector,
@@ -227,18 +236,19 @@ async def archive_session(session_id: str, request: Request, user: AuthUser = De
     if record:
         # Retrain in-memory ML model with the new project
         try:
-            app_state = request.app.state if hasattr(request, "app") else None
-            if app_state and hasattr(app_state, "similarity"):
+            app_state = request.app.state
+            if hasattr(app_state, "similarity"):
                 modules_text = ", ".join(modules)
-                req_text = f"{req_row.get('requirements_text', '')} Modules: {modules_text}"
+                domain = proj.get("industry") or ""
+                req_text = f"{req_row.get('requirements_text', '')} Modules: {modules_text}. Domain: {domain}."
                 new_ml_row = {
                     "project_name": proj.get("project_name"),
-                    "domain": proj.get("industry"),
+                    "domain": domain,
                     "requirements_text": req_text,
                     "tech_stack": tech_stack,
                     "code_structure": state.get("code_structure"),
-                    "estimated_effort_pm": est.get("self_learning_effort_pm") if est else None,
-                    "actual_effort_pm": est.get("self_learning_effort_pm") if est else None,
+                    "estimated_effort_pm": est.get("self_learning_effort_pm"),
+                    "actual_effort_pm": est.get("self_learning_effort_pm"),
                     "structured_features": {"modules": modules, "module_count": len(modules)},
                 }
                 app_state.similarity.retrain(new_ml_row)
@@ -253,7 +263,13 @@ async def archive_session(session_id: str, request: Request, user: AuthUser = De
 @router.delete("/sessions/{session_id}")
 async def delete_session(session_id: str, user: AuthUser = Depends(get_current_user)):
     """
-    Cascade order: whatif_scenarios → estimations → requirements → sessions → projects (if no other sessions)
+    Correct cascade order:
+    1. Delete whatif_scenarios (FK → sessions)
+    2. Null out sessions.estimation_id (breaks FK → estimations)
+    3. Delete estimations
+    4. Delete requirements (FK → projects, cascade)
+    5. Delete session
+    6. Delete project if no other sessions remain
     """
     profile = await ensure_profile(user)
     sess_rows = await rest_select("sessions", user, filters={"id": f"eq.{session_id}", "user_id": f"eq.{profile['id']}"}, limit=1)
@@ -261,12 +277,31 @@ async def delete_session(session_id: str, user: AuthUser = Depends(get_current_u
         raise HTTPException(status_code=404, detail="Session not found")
     sess = sess_rows[0]
 
+    # Step 1 — delete child records that reference the session
     await rest_delete("whatif_scenarios", user, filters={"session_id": f"eq.{session_id}"})
+
+    # Step 2 — null out estimation_id FK so we can safely delete the estimation
     if sess.get("estimation_id"):
+        await rest_update(
+            "sessions", user,
+            filters={"id": f"eq.{session_id}"},
+            updates={"estimation_id": None},
+        )
+        # Step 3 — null out requirements_id FK on estimation, then delete it
+        await rest_update(
+            "estimations", user,
+            filters={"id": f"eq.{sess['estimation_id']}"},
+            updates={"requirements_id": None},
+        )
         await rest_delete("estimations", user, filters={"id": f"eq.{sess['estimation_id']}"})
+
+    # Step 4 — now safe to delete requirements (nothing references them)
     await rest_delete("requirements", user, filters={"project_id": f"eq.{sess['project_id']}"})
+
+    # Step 5 — delete the session itself
     await rest_delete("sessions", user, filters={"id": f"eq.{session_id}"})
 
+    # Step 6 — delete project if no other sessions remain
     remaining = await rest_select("sessions", user, filters={"project_id": f"eq.{sess['project_id']}"}, limit=1)
     if not remaining:
         await rest_delete("projects", user, filters={"id": f"eq.{sess['project_id']}"})

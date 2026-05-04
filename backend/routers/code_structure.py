@@ -66,8 +66,15 @@ async def generate_code_structure(
     groq = GroqClient()
     sim = request.app.state.similarity
 
-    # ── Get top-N similar projects ────────────────────────────────────────────
-    top_matches = sim.find_top_matches(payload.requirements_text, top_n=3)
+    # Get current project name to exclude from similarity (prevent self-matching)
+    project_name = sess.get("session_name", "").replace(" — Session", "").strip()
+
+    # ── Get top-N similar projects (excluding current project) ───────────────
+    top_matches = sim.find_top_matches(
+        payload.requirements_text,
+        top_n=3,
+        exclude_project_name=project_name or None,
+    )
     tech_stack_rec = top_matches[0].tech_stack_recommendation if top_matches else {}
 
     # Separate matches that have code_structure vs those that don't

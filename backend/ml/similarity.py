@@ -176,10 +176,11 @@ class SimilarityEngine:
         new_requirements: str,
         domain: str | None = None,
         top_n: int = 3,
+        exclude_project_name: str | None = None,
     ) -> list[SimilarityMatch]:
         """
         Return up to top_n matches above SIMILARITY_THRESHOLD.
-        Used for multi-project code structure generation.
+        exclude_project_name: skip the current project (prevents self-matching).
         """
         if self.matrix is None or len(self.past_projects) < 2:
             return []
@@ -189,11 +190,15 @@ class SimilarityEngine:
         sorted_indices = np.argsort(scores)[::-1]
 
         matches: list[SimilarityMatch] = []
-        for idx in sorted_indices[:top_n * 2]:  # check more, filter below threshold
+        for idx in sorted_indices[:top_n * 3]:  # check more, filter below
             score = float(scores[idx])
             if score < SIMILARITY_THRESHOLD:
                 break
-            matches.append(SimilarityMatch(score=score, project=self.past_projects[idx]))
+            project = self.past_projects[idx]
+            # Skip if this is the same project being estimated (self-match)
+            if exclude_project_name and project.get("project_name", "").lower() == exclude_project_name.lower():
+                continue
+            matches.append(SimilarityMatch(score=score, project=project))
             if len(matches) >= top_n:
                 break
 
@@ -215,9 +220,9 @@ class SimilarityEngine:
 
         return matches
 
-    def find_match(self, new_requirements: str, domain: str | None = None) -> SimilarityMatch | None:
+    def find_match(self, new_requirements: str, domain: str | None = None, exclude_project_name: str | None = None) -> SimilarityMatch | None:
         """Legacy single-match interface — wraps find_top_matches."""
-        matches = self.find_top_matches(new_requirements, domain, top_n=1)
+        matches = self.find_top_matches(new_requirements, domain, top_n=1, exclude_project_name=exclude_project_name)
         if not matches:
             # Still build stack recommendation even with no match
             stack_rec = _recommend_stack(new_requirements, domain, [])

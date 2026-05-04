@@ -224,7 +224,7 @@ async def run_all(request: Request, body: dict[str, Any], user: AuthUser = Depen
         raise HTTPException(status_code=404, detail="Requirements not found")
     req_row = req_rows[0]
 
-    match = sim.find_match(req_row["requirements_text"])
+    match = sim.find_match(req_row["requirements_text"], exclude_project_name=None)
     referenced = match.project if match else None
     sl_pred = sl.predict(raw_estimate=raw_est, referenced_project=referenced)
 

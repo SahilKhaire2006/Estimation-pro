@@ -62,24 +62,14 @@ export default function SessionPage() {
     setSaving(false);
   }
 
-  // Auto-archive when navigating back to dashboard
+  // Auto-archive ONLY when user explicitly clicks Dashboard button
+  // Do NOT archive on component unmount — that fires too early (on hot-reload, tab switch, etc.)
   async function goToDashboard() {
-    // Fire archive in background, don't wait — navigate immediately
-    archiveToML(true);
+    archiveToML(true); // fire in background, don't wait
     nav("/dashboard");
   }
 
   useEffect(() => { load(); }, [id]); // eslint-disable-line
-
-  // Auto-archive on page unload (tab close / browser back)
-  // Note: sendBeacon can't send auth headers, so we use a best-effort approach
-  // The primary archive trigger is goToDashboard() and handleSaveToML()
-  useEffect(() => {
-    return () => {
-      // On component unmount (navigation away), fire archive silently
-      archiveToML(true);
-    };
-  }, [id]); // eslint-disable-line
 
   const requirementsText = bundle?.requirements?.requirements_text ?? "";
   const similarityMeta = bundle?.session?.session_state?.similarity_meta;
